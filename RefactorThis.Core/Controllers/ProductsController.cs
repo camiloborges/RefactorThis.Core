@@ -9,7 +9,6 @@ using System.Linq;
 
 namespace RefactorThis.Controllers
 {
-    //  [RoutePrefix("products")]
     [Route("products")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -19,7 +18,7 @@ namespace RefactorThis.Controllers
 
         public ProductsController(ILogger<ProductsController> logger, IProductsRepository repository)
         {
-            _logger = logger;// logger.CreateLogger("RefactorThis.Controllers.ProductsController"); ;
+            _logger = logger;
             _repository = repository;
         }
 

@@ -16,7 +16,7 @@ namespace RefactorThis.Core.Repository
         public ProductsRepository(IProductsContext dataContext, ILogger<ProductsRepository> logger)
         {
             _context = dataContext;
-            _logger = logger;//.CreateLogger("RefactorThis.Core.Repository.ProductsRepository"); ;
+            _logger = logger;
         }
 
         public IEnumerable<Product> GetAllProducts()

@@ -10,4 +10,4 @@ This challenge was completed in around 12 hrs and since it is a refactoring job 
 - change constructors to use ILoggerFactory instead of ILogger
 - Ensure BadResponses are always returned when exceptions happen
 - Separate Repository and Controllers so there is one for Product and one for ProductOptions
-- 
+- Break down into multiple projects
