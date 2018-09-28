@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace RefactorThis.Core.Models
 {
@@ -15,12 +14,14 @@ namespace RefactorThis.Core.Models
             : base(options)
         {
         }
-        public bool SaveContextChanges() {
+
+        public bool SaveContextChanges()
+        {
             var changes = base.SaveChanges();
             return changes > 0;
             // SaveChanges();
-            
         }
+
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductOption> ProductOption { get; set; }
 
@@ -35,7 +36,6 @@ namespace RefactorThis.Core.Models
                       .AddJsonFile("appsettings.json")
                       .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-
             }
         }
 

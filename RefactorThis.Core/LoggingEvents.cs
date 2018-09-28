@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-
-namespace RefactorThis.Core
+﻿namespace RefactorThis.Core
 {
     public class LoggingEvents
     {
@@ -24,6 +18,5 @@ namespace RefactorThis.Core
         public const int GetProductNotFound = 4000;
         public const int UpdateProductNotFound = 4001;
         public const int GetProductOptionsNotFound = 4002;
-
     }
 }

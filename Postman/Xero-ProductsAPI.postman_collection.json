@@ -1,0 +1,205 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Xero-ProductsAPI",
+		"_postman_id": "5c06f454-da52-2a9f-0f2c-8cda527f4e76",
+		"description": "Sandpit for testing POC API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllProducts",
+			"request": {
+				"url": "https://localhost:44368/products",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetByName",
+			"request": {
+				"url": {
+					"raw": "https://localhost:44368/products?name=Galaxy",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44368",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Galaxy",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddProduct",
+			"request": {
+				"url": "https://localhost:44368/products",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"8f2e9176-35ee-4f0a-ae55-83023d2db668\",\r\n  \"name\": \"iPhone XS Lambda\",\r\n  \"description\": \"Newest mobile product from Apple supporting lambas.\",\r\n  \"price\": 1924.99,\r\n  \"deliveryPrice\": 0.0,\r\n  \"productOptions\": [\r\n    {\r\n      \"id\": \"0643ccf0-ab00-4862-b3c5-40e2731ab640\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db662\",\r\n      \"name\": \"White\",\r\n      \"description\": \"Gold\"\r\n    },\r\n    {\r\n      \"id\": \"a21d5777-a655-4020-b431-624bb331e941\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db661\",\r\n      \"name\": \"Black\",\r\n      \"description\": \"Black\"\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProduct",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db668",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"8f2e9176-35ee-4f0a-ae55-83023d2db668\",\r\n  \"name\": \"iPhone XS Lambda\",\r\n  \"description\": \"Newest mobile product from Apple supporting lambas.\",\r\n  \"price\": 1924.99,\r\n  \"deliveryPrice\": 0.0,\r\n  \"productOptions\": [\r\n    {\r\n      \"id\": \"0643ccf0-ab00-4862-b3c5-40e2731ab640\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db662\",\r\n      \"name\": \"White\",\r\n      \"description\": \"Gold\"\r\n    },\r\n    {\r\n      \"id\": \"a21d5777-a655-4020-b431-624bb331e941\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db661\",\r\n      \"name\": \"Black\",\r\n      \"description\": \"Black\"\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db668",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"8f2e9176-35ee-4f0a-ae55-83023d2db668\",\r\n  \"name\": \"iPhone XS Lambda\",\r\n  \"description\": \"Newest mobile product from Apple supporting lambas.\",\r\n  \"price\": 1924.99,\r\n  \"deliveryPrice\": 0.0,\r\n  \"productOptions\": [\r\n    {\r\n      \"id\": \"0643ccf0-ab00-4862-b3c5-40e2731ab640\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db662\",\r\n      \"name\": \"White\",\r\n      \"description\": \"Gold\"\r\n    },\r\n    {\r\n      \"id\": \"a21d5777-a655-4020-b431-624bb331e941\",\r\n      \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db661\",\r\n      \"name\": \"Black\",\r\n      \"description\": \"Black\"\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductOptions",
+			"request": {
+				"url": "https://localhost:44368/products/de1287c0-4b15-4a7b-9d8a-dd21b3cafec3/options",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetProductOptionById",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/0643ccf0-ab00-4862-b3c5-40e2731abcc9",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "AddProductOption",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"0643ccf0-ab00-4862-b3c5-40e2731abc19\",\n    \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db1a3\",\n    \"name\": \"Silver\",\n    \"description\": \"Silver Samsung Galaxy S7\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateProductOption",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"0643ccf0-ab00-4862-b3c5-40e2731abcc9\",\n    \"productId\": \"8f2e9176-35ee-4f0a-ae55-83023d2db1a3\",\n    \"name\": \"WhiteWhite\",\n    \"description\": \"White Samsung Galaxy S7 White\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProductOption",
+			"request": {
+				"url": "https://localhost:44368/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/0643ccf0-ab00-4862-b3c5-40e2731abc19",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

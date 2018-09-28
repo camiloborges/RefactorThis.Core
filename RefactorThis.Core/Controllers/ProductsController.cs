@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
 using RefactorThis.Core.Models;
 using RefactorThis.Core.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RefactorThis.Controllers
 {
-  //  [RoutePrefix("products")]
+    //  [RoutePrefix("products")]
     [Route("products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
-
         private readonly ILogger _logger;
         private readonly IProductsRepository _repository;
 
-        public ProductsController(ILogger<ProductsController> logger, IProductsRepository repository) {
+        public ProductsController(ILogger<ProductsController> logger, IProductsRepository repository)
+        {
             _logger = logger;// logger.CreateLogger("RefactorThis.Controllers.ProductsController"); ;
             _repository = repository;
         }
-      
+
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get([FromQuery]string name)
         {
@@ -38,12 +34,12 @@ namespace RefactorThis.Controllers
                     products = _repository.GetAllProducts();
                 else
                     products = _repository.SearchByName(name);
-                return new OkObjectResult( products.ToList());
+                return new OkObjectResult(products.ToList());
             }
-            catch(Exception exception) {
+            catch (Exception exception)
+            {
                 _logger.LogError(LoggingEvents.GetAll, exception, "Getting Exception {name}", name);
                 throw exception;
-
             }
         }
 
@@ -61,7 +57,8 @@ namespace RefactorThis.Controllers
                     return new NotFoundResult();
                 }
 
-                return new OkObjectResult(new Product() {
+                return new OkObjectResult(new Product()
+                {
                     DeliveryPrice = product.DeliveryPrice,
                     Name = product.Name,
                     Id = product.Id,
@@ -70,7 +67,8 @@ namespace RefactorThis.Controllers
                     ProductOptions = product.ProductOptions.ToList(),
                 });
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 _logger.LogError(LoggingEvents.GetProduct, exception, "GetProduct Exception {id}", id);
                 throw exception;
             }
@@ -79,7 +77,8 @@ namespace RefactorThis.Controllers
         [HttpPost]
         public void Post(Product product)
         {
-            try { 
+            try
+            {
                 Product item = SanitizeInput(product.Id, product);
                 _repository.AddProduct(item);
             }
@@ -135,7 +134,8 @@ namespace RefactorThis.Controllers
                 var product = _repository.GetProduct(id);
                 _repository.DeleteProduct(product);
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 _logger.LogError(LoggingEvents.DeleteProduct, exception, "DeleteProduct Exception Id {id}", id);
                 throw exception;
             }
@@ -145,8 +145,9 @@ namespace RefactorThis.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ProductOption>> GetProductOptions(Guid productId)
         {
-            try { 
-                return new OkObjectResult( _repository.GetProductOptions(productId) );
+            try
+            {
+                return new OkObjectResult(_repository.GetProductOptions(productId));
             }
             catch (Exception exception)
             {
@@ -189,7 +190,7 @@ namespace RefactorThis.Controllers
 
         [Route("{productId}/options/{id}")]
         [HttpPut]
-        public void UpdateOption(Guid productId, Guid id,  ProductOption option)
+        public void UpdateOption(Guid productId, Guid id, ProductOption option)
         {
             try
             {
@@ -211,7 +212,7 @@ namespace RefactorThis.Controllers
 
         [Route("{productId}/options/{id}")]
         [HttpDelete]
-        public void DeleteOption(Guid productId, Guid id )
+        public void DeleteOption(Guid productId, Guid id)
         {
             try
             {

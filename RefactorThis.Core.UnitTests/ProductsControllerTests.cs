@@ -1,21 +1,20 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using RefactorThis.Core.Repository;
 using RefactorThis.Controllers;
-using System;
-using Xunit;
-using RefactorThis.Core.UnitTests.Mocks;
-using System.Collections.Generic;
 using RefactorThis.Core.Models;
+using RefactorThis.Core.Repository;
+using RefactorThis.Core.UnitTests.Mocks;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using Xunit;
 using Xunit.Extensions.AssertExtensions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace RefactorThis.Core.UnitTests
 {
     public class ProductsControllerTests
     {
-       
         [Fact]
         public void GetAllProductsReturnsAllItems()
         {
@@ -25,11 +24,12 @@ namespace RefactorThis.Core.UnitTests
 
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.Get(null);
-            var resultValue= Assert.IsType<OkObjectResult>(result.Result);
+            var resultValue = Assert.IsType<OkObjectResult>(result.Result);
             var okResult = Assert.IsType<List<Product>>(resultValue.Value);
             repo.Verify();
             okResult.Count().ShouldEqual(2);
         }
+
         [Fact]
         public void GetProductByNameReturnsSuccess()
         {
@@ -46,8 +46,8 @@ namespace RefactorThis.Core.UnitTests
 
             var product = okResult.First();
             product.Name.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Name);
-
         }
+
         [Fact]
         public void GetProductByNameThatDoesntExistReturnsEmpty()
         {
@@ -60,7 +60,6 @@ namespace RefactorThis.Core.UnitTests
             var okResult = Assert.IsType<List<Product>>(resultValue.Value);
             repo.Verify();
             okResult.Count().ShouldEqual(0);
-
         }
 
         [Fact]
@@ -77,9 +76,8 @@ namespace RefactorThis.Core.UnitTests
             okResult.Id.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Id);
             okResult.Name.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Name);
             okResult.ProductOptions.Count().ShouldEqual(2);
-
         }
-      
+
         [Fact]
         public void AddProductSuccess()
         {
@@ -97,8 +95,8 @@ namespace RefactorThis.Core.UnitTests
             okResult.Id.ShouldEqual(ProductMocks.NewProductiPhoneXS.Id);
             okResult.Name.ShouldEqual(ProductMocks.NewProductiPhoneXS.Name);
             okResult.ProductOptions.Count().ShouldEqual(2);
-
         }
+
         [Fact]
         public void AddProductDuplicateKeyError()
         {
@@ -110,8 +108,9 @@ namespace RefactorThis.Core.UnitTests
             repo.Setup(r => r.AddProduct(It.IsAny<Product>())).Throws<InvalidOperationException>();
             var controller = new ProductsController(logger.Object, repo.Object);
 
-            Assert.Throws< InvalidOperationException>(()=> controller.Post(targetProduct));
+            Assert.Throws<InvalidOperationException>(() => controller.Post(targetProduct));
         }
+
         [Fact]
         public void UpdateProductNotFoundError()
         {
@@ -122,6 +121,7 @@ namespace RefactorThis.Core.UnitTests
             var controller = new ProductsController(logger.Object, repo.Object);
             Assert.Throws<KeyNotFoundException>(() => controller.Update(ProductMocks.NewProductiPhoneXS.Id, ProductMocks.NewProductiPhoneXS));
         }
+
         [Fact]
         public void UpdateProductSuccess()
         {
@@ -134,6 +134,7 @@ namespace RefactorThis.Core.UnitTests
 
             repo.Verify();
         }
+
         [Fact]
         public void DeleteProductSuccess()
         {
@@ -143,7 +144,6 @@ namespace RefactorThis.Core.UnitTests
             var controller = new ProductsController(logger.Object, repo.Object);
             controller.Delete(ProductMocks.ProductSamsungGalaxyS7.Id);
             repo.Verify();
-
         }
 
         [Fact]
@@ -153,10 +153,10 @@ namespace RefactorThis.Core.UnitTests
             var repo = new Mock<IProductsRepository>();
             repo.Setup(r => r.DeleteProduct(It.IsAny<Product>())).Throws<KeyNotFoundException>();
             var controller = new ProductsController(logger.Object, repo.Object);
-            Assert.Throws<KeyNotFoundException>(() => controller.Delete(ProductMocks.ProductSamsungGalaxyS7.Id))    ;
+            Assert.Throws<KeyNotFoundException>(() => controller.Delete(ProductMocks.ProductSamsungGalaxyS7.Id));
             repo.Verify();
-
         }
+
         [Fact]
         public void GetProductOptionsSuccess()
         {
@@ -170,8 +170,8 @@ namespace RefactorThis.Core.UnitTests
             var productOptions = Assert.IsType<List<ProductOption>>(resultValue.Value);
             repo.Verify();
             productOptions.Count().ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.ProductOptions.Count());
-
         }
+
         [Fact]
         public void GetProductOptionsNotFoundError()
         {
@@ -182,7 +182,6 @@ namespace RefactorThis.Core.UnitTests
 
             Assert.Throws<KeyNotFoundException>(() => controller.GetProductOptions(ProductMocks.ProductSamsungGalaxyS7.Id));
             repo.Verify();
-
         }
 
         [Fact]
@@ -212,8 +211,8 @@ namespace RefactorThis.Core.UnitTests
             var controller = new ProductsController(logger.Object, repo.Object);
             Assert.Throws<KeyNotFoundException>(() => controller.GetProductOption(targetOption.ProductId, targetOption.Id));
             repo.Verify();
-
         }
+
         [Fact]
         public void UpdateProductOptionSuccess()
         {
@@ -257,7 +256,6 @@ namespace RefactorThis.Core.UnitTests
             repo.Setup(r => r.DeleteProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(null);
             controller.DeleteOption(option.ProductId, option.Id);
             repo.Verify();
-
         }
 
         [Fact]
@@ -273,7 +271,6 @@ namespace RefactorThis.Core.UnitTests
             repo.Setup(r => r.DeleteProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Throws<KeyNotFoundException>();
             Assert.Throws<KeyNotFoundException>(() => controller.DeleteOption(option.ProductId, option.Id));
             repo.Verify();
-
         }
     }
 }

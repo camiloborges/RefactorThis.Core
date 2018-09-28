@@ -1,22 +1,20 @@
+using KellermanSoftware.CompareNetObjects;
 using Microsoft.Extensions.Logging;
+using Moq;
 using RefactorThis.Core.Models;
 using RefactorThis.Core.Repository;
 using RefactorThis.Core.UnitTests.Mocks;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using Moq;
 using TestSupport.EfHelpers;
 using Xunit;
 using Xunit.Extensions.AssertExtensions;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using KellermanSoftware.CompareNetObjects;
 
 namespace RefactorThis.Core.UnitTests
 {
     public class ProductsRepositoryTests
     {
-        
         [Fact]
         public void AddRangeGetAllReturnsAll2Items()
         {
@@ -39,7 +37,7 @@ namespace RefactorThis.Core.UnitTests
                 products.Count().ShouldEqual(0);
             }
         }
-     
+
         [Fact]
         public void GetProductByNameReturnsSuccess()
         {
@@ -57,9 +55,10 @@ namespace RefactorThis.Core.UnitTests
                 product.Name.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Name);
             }
         }
+
         [Fact]
         public void GetProductByNameReturnsEmpty()
-        {   
+        {
             var options = EfInMemory.CreateOptions<ProductsContext>();
             using (var context = new ProductsContext(options))
             {
@@ -89,7 +88,7 @@ namespace RefactorThis.Core.UnitTests
                 product.ProductOptions.Count().ShouldEqual(2);
             }
         }
-       
+
         [Fact]
         public void AddProductSuccess()
         {
@@ -98,7 +97,6 @@ namespace RefactorThis.Core.UnitTests
                 var options = EfInMemory.CreateOptions<ProductsContext>();
                 using (var context = new ProductsContext(options))
                 {
-
                     var logger = new Mock<ILogger<ProductsRepository>>();
                     var repository = new ProductsRepository(context, logger.Object);
                     repository.AddProduct(ProductMocks.NewProductiPhoneXS);
@@ -112,6 +110,7 @@ namespace RefactorThis.Core.UnitTests
                 var s = ex.Message;
             }
         }
+
         [Fact]
         public void AddProductDuplicateKeyError()
         {
@@ -124,6 +123,7 @@ namespace RefactorThis.Core.UnitTests
                 Assert.Throws<InvalidOperationException>(() => repository.AddProduct(ProductMocks.ProductSamsungGalaxyS7));
             }
         }
+
         [Fact]
         public void UpdateProductNotFoundError()
         {
@@ -135,6 +135,7 @@ namespace RefactorThis.Core.UnitTests
                 Assert.Throws<KeyNotFoundException>(() => repository.UpdateProduct(ProductMocks.ProductSamsungGalaxyS7));
             }
         }
+
         [Fact]
         public void UpdateProductSuccess()
         {
@@ -153,6 +154,7 @@ namespace RefactorThis.Core.UnitTests
                 updatedProduct.Description.ShouldBeSameAs(product.Description);
             }
         }
+
         [Fact]
         public void DeleteProductSuccess()
         {
@@ -177,6 +179,7 @@ namespace RefactorThis.Core.UnitTests
                 Assert.Throws<KeyNotFoundException>(() => repository.DeleteProduct(ProductMocks.NewProductiPhoneXS));
             }
         }
+
         [Fact]
         public void GetProductOptionsSuccess()
         {
@@ -190,7 +193,6 @@ namespace RefactorThis.Core.UnitTests
                 productOptions.Count().ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.ProductOptions.Count());
             }
         }
-        
 
         [Fact]
         public void GetProductOptionSuccess()
@@ -255,7 +257,7 @@ namespace RefactorThis.Core.UnitTests
                 var repository = new ProductsRepository(context, logger.Object);
                 option.Name = "UpdatedName";
                 option.Description = "UpdatedDescription";
-                Assert.Throws<KeyNotFoundException>(() => repository.UpdateProductOption(option)); 
+                Assert.Throws<KeyNotFoundException>(() => repository.UpdateProductOption(option));
             }
         }
 

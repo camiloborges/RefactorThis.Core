@@ -59,7 +59,7 @@ namespace RefactorThis.Core.Repository
                 _context.SaveContextChanges();
                 return newProduct.Entity;
             }
-            catch(InvalidOperationException operationException)
+            catch (InvalidOperationException operationException)
             {
                 _logger.LogError(LoggingEvents.AddProduct, operationException, "Possible Primary Key Violation {id}", product.Id);
                 throw operationException;
@@ -107,7 +107,7 @@ namespace RefactorThis.Core.Repository
 
         public ProductOption AddProductOption(ProductOption option)
         {
-           var  addedOption = _context.ProductOption.Add(option);
+            var addedOption = _context.ProductOption.Add(option);
             _context.SaveContextChanges();
             return addedOption.Entity;
         }

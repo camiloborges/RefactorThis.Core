@@ -7,8 +7,10 @@ namespace RefactorThis.Core.UnitTests.Mocks
 {
     public static class ProductMocks
     {
-        public static Product ProductSamsungGalaxyS7 {
-            get {
+        public static Product ProductSamsungGalaxyS7
+        {
+            get
+            {
                 return new Product()
                 {
                     Id = new Guid("8f2e9176-35ee-4f0a-ae55-83023d2db1a3"),
@@ -62,6 +64,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
                 };
             }
         }
+
         public static IEnumerable<Product> ProductsBaseDataset
         {
             get
@@ -100,7 +103,6 @@ namespace RefactorThis.Core.UnitTests.Mocks
             }
         }
 
-
         public static IEnumerable<Product> ProductsWithNoOptions
         {
             get
@@ -112,6 +114,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
                 });
             }
         }
+
         public static IEnumerable<Product> ProductsWithNullOptions
         {
             get
@@ -128,10 +131,8 @@ namespace RefactorThis.Core.UnitTests.Mocks
         {
             get
             {
-
                 return new Product()
                 {
-
                     Id = new Guid("8f2e9176-35ee-4f0a-ae55-83023d2db668"),
                     Name = "iPhone XS Lambda",
                     Description = "Newest mobile product from Apple supporting lambas.",
@@ -151,10 +152,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
                               Description =  "Black"
                             } }
                 };
-
             }
-
         }
     }
-
 }
