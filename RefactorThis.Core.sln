@@ -3,9 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core", "RefactorThis.Core\RefactorThis.Core.csproj", "{3E2D65DF-E343-45F1-B3DC-3BB233766000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core", "RefactorThis.Core\RefactorThis.Core.csproj", "{3E2D65DF-E343-45F1-B3DC-3BB233766000}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.UnitTests", "RefactorThis.Core.UnitTests\RefactorThis.Core.UnitTests.csproj", "{DF3364E8-DE81-428F-9D3D-E745342EF390}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.UnitTests", "RefactorThis.Core.UnitTests\RefactorThis.Core.UnitTests.csproj", "{DF3364E8-DE81-428F-9D3D-E745342EF390}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8776AD6D-258A-4D53-99C9-71AB7E45A3F4}"
+	ProjectSection(SolutionItems) = preProject
+		LimitationsAndOportunities.md = LimitationsAndOportunities.md
+		README.md = README.md
+		RefactoringSteps.md = RefactoringSteps.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
