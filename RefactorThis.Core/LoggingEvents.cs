@@ -1,6 +1,6 @@
 ﻿namespace RefactorThis.Core
 {
-    public class LoggingEvents
+    public static class LoggingEvents
     {
         public const int GetAll = 1000;
         public const int SearchByName = 1001;

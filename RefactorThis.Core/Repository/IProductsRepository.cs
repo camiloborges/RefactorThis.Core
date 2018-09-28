@@ -24,7 +24,7 @@ namespace RefactorThis.Core.Repository
 
         IEnumerable<Product> SearchByName(string name);
 
-        ProductOption AddProductOption(ProductOption option);
+        ProductOption AddProductOption(ProductOption productOption);
 
         bool UpdateProductOption(ProductOption orig);
 

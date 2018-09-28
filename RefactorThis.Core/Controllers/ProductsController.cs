@@ -38,7 +38,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetAll, exception, "Getting Exception {name}", name);
-                throw exception;
+                throw ;
             }
         }
 
@@ -69,7 +69,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetProduct, exception, "GetProduct Exception {id}", id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -84,7 +84,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.AddProduct, exception, "AddProduct Exception {id}", product.Id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -100,7 +100,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.UpdateProduct, exception, "UpdateProduct Exception {id}", product.Id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -136,7 +136,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.DeleteProduct, exception, "DeleteProduct Exception Id {id}", id);
-                throw exception;
+                throw;
             }
         }
 
@@ -151,7 +151,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetProductOptions, exception, "GetProductOptions Exception productId {productId}", productId);
-                throw exception;
+                throw;
             }
         }
 
@@ -167,7 +167,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetProductOption, exception, "GetProductOption Exception productId {productId} id {id}", productId, id);
-                throw exception;
+                throw;
             }
         }
 
@@ -183,7 +183,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.AddProductOption, exception, "AddProductOption Exception productId {productId} id {id}", productId, option.Id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -205,7 +205,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.UpdateProductOption, exception, "UpdateProductOption Exception productId {productId} id {id}", productId, id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -220,7 +220,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.DeleteProductOption, exception, "DeleteOption Exception productId {productId} id {id}", productId, id);
-                throw exception;
+                throw ;
             }
         }
     }

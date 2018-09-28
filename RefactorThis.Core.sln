@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8776AD6D-258A-4D53-99C9-71AB7E45A3F4}"
 	ProjectSection(SolutionItems) = preProject
 		LimitationsAndOportunities.md = LimitationsAndOportunities.md
+		original-README.md = original-README.md
 		README.md = README.md
 		RefactoringSteps.md = RefactoringSteps.md
 	EndProjectSection

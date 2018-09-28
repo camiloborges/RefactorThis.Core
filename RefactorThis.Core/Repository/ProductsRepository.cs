@@ -62,12 +62,12 @@ namespace RefactorThis.Core.Repository
             catch (InvalidOperationException operationException)
             {
                 _logger.LogError(LoggingEvents.AddProduct, operationException, "Possible Primary Key Violation {id}", product.Id);
-                throw operationException;
+                throw ;
             }
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.AddProduct, exception, "AddProduct Exception {id}", product.Id);
-                throw exception;
+                throw ;
             }
         }
 
@@ -101,7 +101,7 @@ namespace RefactorThis.Core.Repository
 
         public IEnumerable<Product> SearchByName(string name)
         {
-            var items = _context.Product.Where(p => p.Name.Contains(name));
+            var items = _context.Product.Where(p => p.Name.Contains(name, StringComparison.InvariantCulture));
             return items;
         }
 

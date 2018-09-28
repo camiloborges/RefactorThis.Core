@@ -1,80 +1,22 @@
-# refactor-this
-A terribly written Web API project that can be used as a test for potential C# applicants.  It's terrible on purpose, so that you can show us how we can improve it.
+# RefactorThis.Core
 
-## Progress
-- [Limitations And Oportunities](./LimitationsAndOportunities)
-- [Refactoring Steps](./RefactoringSteps)
-## Getting started for applicants
+This is a response to a code challenge I was presented with.
 
-Fork this repository and make your changes to this project to make it better.  Simple.  There are no rules, except that we know that this project is very badly written, on purpose.  So, your job, should you choose to accept it, is to make the project better in any way you see fit.
+I received a poorly written .net 4.5 code(not sure which version) and I was asked to refactor it. 
+The only thing I've tried to do was to keep endpoint behaviour as original code, which I am unable to test.
 
-To set up the project:
+There are further oportunities to improve this code but I feel this is a good enough start.
 
-* Visual Studio 2015 is preferred.
-* Open in VS.
-* Restore nuget packages and rebuild.
-* Run the project.
+I have commited between 12 and 16hrs to this (on and off).
 
-There should be these endpoints:
 
-1. `GET /products` - gets all products.
-2. `GET /products?name={name}` - finds all products matching the specified name.
-3. `GET /products/{id}` - gets the project that matches the specified ID - ID is a GUID.
-4. `POST /products` - creates a new product.
-5. `PUT /products/{id}` - updates a product.
-6. `DELETE /products/{id}` - deletes a product and its options.
-7. `GET /products/{id}/options` - finds all options for a specified product.
-8. `GET /products/{id}/options/{optionId}` - finds the specified product option for the specified product.
-9. `POST /products/{id}/options` - adds a new product option to the specified product.
-10. `PUT /products/{id}/options/{optionId}` - updates the specified product option.
-11. `DELETE /products/{id}/options/{optionId}` - deletes the specified product option.
+# further notes
+[Original Readme](./README)
+[Refactoring Steps](./RefactoringSteps)
+[LimitationsAndOportunities](./LimitationsAndOportunities)
+# references
 
-All models are specified in the `/Models` folder, but should conform to:
-
-**Product:**
-```
-{
-  "Id": "01234567-89ab-cdef-0123-456789abcdef",
-  "Name": "Product name",
-  "Description": "Product description",
-  "Price": 123.45,
-  "DeliveryPrice": 12.34
-}
-```
-
-**Products:**
-```
-{
-  "Items": [
-    {
-      // product
-    },
-    {
-      // product
-    }
-  ]
-}
-```
-
-**Product Option:**
-```
-{
-  "Id": "01234567-89ab-cdef-0123-456789abcdef",
-  "Name": "Product name",
-  "Description": "Product description"
-}
-```
-
-**Product Options:**
-```
-{
-  "Items": [
-    {
-      // product option
-    },
-    {
-      // product option
-    }
-  ]
-}
-```
+[Logging in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1)
+[Repository Pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/repository-pattern?view=aspnetcore-2.1)
+[Build web APIs with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-2.1)
+[Test, debug and troubleshoot in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/test/?view=aspnetcore-2.1)

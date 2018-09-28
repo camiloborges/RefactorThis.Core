@@ -5,5 +5,8 @@
 4) reviewed Model, included foreign keys, updated migrations
 5) Decided to Keep Controller, Add DB Context and a Repository
 6) Created unit tests for required scenarios
-7) Created Postman to validate challenge ask is completed 
-8) Documented Process 
+7) Completed code
+8) Added Swagger
+9) Created Postman to validate challenge ask is completed 
+10) Documented Process
+11) Executed Code Analysis 
