@@ -15,3 +15,5 @@ This challenge was completed in around 12 hrs and since it is a refactoring job 
 ## review questions
 - Should Repository Throw KeyNotfound or should this be done at controller level? 
 - Should there be a layer between repository and controller? This doesn't feel big enough for that, but might be something to be tackled 
+- This is a pretty simple service, but should we have ViewModels and FluentValidations?
+- 
