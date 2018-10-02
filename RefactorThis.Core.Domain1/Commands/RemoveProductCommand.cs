@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace RefactorThis.Core.API.Application.Commands
 {
-    public class GetProductOptionCommand : Command
+    public class RemoveProductCommand : Command
     {
+        private Guid id;
+
+        public RemoveProductCommand(Guid id)
+        {
+            this.id = id;
+        }
+
         public override bool IsValid()
         {
             throw new NotImplementedException();

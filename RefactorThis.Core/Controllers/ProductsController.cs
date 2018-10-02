@@ -1,8 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
+using RefactorThis.Core.Application.Interfaces;
+using RefactorThis.Core.Controllers;
 using RefactorThis.Core.Domain;
 using RefactorThis.Core.Domain.Core;
+using RefactorThis.Core.Domain.Core.Bus;
+using RefactorThis.Core.Domain.Core.Notifications;
 using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Models;
 using System;
@@ -13,17 +18,28 @@ namespace RefactorThis.Controllers
 {
     [Route("products")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : ApiController
     {
         private readonly ILogger _logger;
         private readonly IProductsRepository _repository;
+        /**/
 
-        public ProductsController(ILogger<ProductsController> logger, IProductsRepository repository)
+        public ProductsController(
+             IProductAppService customerAppService,
+            INotificationHandler<DomainNotification> notifications,
+            IMediatorHandler mediator) : base(notifications, mediator)
+        {
+           /* _logger = logger;
+            _repository = repository;*/
+        }
+/*
+        public ProductsController(
+            ILogger<ProductsController> logger, IProductsRepository repository)
         {
             _logger = logger;
             _repository = repository;
         }
-
+        */
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get([FromQuery]string name)
         {

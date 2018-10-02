@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RefactorThis.Core.API.Application.Commands
 {
-    public class GetProductOptionCommand : Command
+    public class CreateProductOptionCommand : Command
     {
         public override bool IsValid()
         {

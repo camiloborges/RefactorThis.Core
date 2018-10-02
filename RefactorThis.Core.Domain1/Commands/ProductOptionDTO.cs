@@ -1,13 +1,15 @@
 ﻿using RefactorThis.Core.Domain.Core.Commands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RefactorThis.Core.API.Application.Commands
 {
-    public class GetProductOptionCommand : Command
+
+    public class ProductOptionDTO : Command
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
         public override bool IsValid()
         {
             throw new NotImplementedException();

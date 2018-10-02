@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Domain.CommandHandlers
 {
-    public class DeleteProductCommandHandler
+    public class RemoveProductCommandHandler
     {
     }
 }

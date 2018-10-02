@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\CustomerViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ViewModels\CustomerViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RefactorThis.Core.Domain1\RefactorThis.Core.Domain.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain.Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Infra.Data", "RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj", "{5C90545F-0784-4140-BEE8-5857D89844B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Application", "RefactorThis.Core.Application\RefactorThis.Core.Application.csproj", "{2A3ECA92-4B96-46B6-AB87-42C049CD648A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{5C90545F-0784-4140-BEE8-5857D89844B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C90545F-0784-4140-BEE8-5857D89844B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C90545F-0784-4140-BEE8-5857D89844B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

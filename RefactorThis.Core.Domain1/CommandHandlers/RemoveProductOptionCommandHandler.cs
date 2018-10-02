@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RefactorThis.Core.API.Application.Commands
+namespace RefactorThis.Core.Domain.CommandHandlers
 {
-    public class DeleteProductCommand
+    public class RemoveProductOptionCommandHandler
     {
     }
 }

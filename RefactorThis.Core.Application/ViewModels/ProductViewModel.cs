@@ -1,17 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace RefactorThis.Core.Domain
+namespace RefactorThis.Core.Application.ViewModels
 {
-    public partial class ProductOption
+    public class ProductViewModel
     {
         [Key]
         public Guid Id { get; set; }
-
-        [Required(ErrorMessage = "The Product Id is Required")]
-        [DisplayName("Product Id")]
-        public Guid ProductId { get; set; }
 
         [Required(ErrorMessage = "The Name is Required")]
         [MinLength(2)]
@@ -24,6 +22,14 @@ namespace RefactorThis.Core.Domain
         [MaxLength(500)]
         [DisplayName("Description")]
         public string Description { get; set; }
-       
+
+        [Required(ErrorMessage = "The Price is Required")]
+        [DisplayName("Price")]
+        public decimal Price { get; set; }
+        [Required(ErrorMessage = "The Delivery Price is Required")]
+        [DisplayName("Delivery Price")]
+        public decimal DeliveryPrice { get; set; }
+
+        public IEnumerable<ProductOptionViewModel> ProductOptions { get; set; }
     }
 }

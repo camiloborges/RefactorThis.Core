@@ -5,23 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Interfaces\ICustomerRepository.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Interfaces\ICustomerRepository.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CommandHandlers\" />
-    <Folder Include="Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RefactorThis.Core.Domain.Core\RefactorThis.Core.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
