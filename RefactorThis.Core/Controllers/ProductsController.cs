@@ -1,45 +1,30 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
-using RefactorThis.Core.Application.Interfaces;
-using RefactorThis.Core.Controllers;
-using RefactorThis.Core.Domain;
-using RefactorThis.Core.Domain.Core;
-using RefactorThis.Core.Domain.Core.Bus;
-using RefactorThis.Core.Domain.Core.Notifications;
-using RefactorThis.Core.Domain.Interfaces;
+using RefactorThis.Core.Core.Extensions;
+using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
+using RefactorThis.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace RefactorThis.Controllers
 {
     [Route("products")]
     [ApiController]
-    public class ProductsController : ApiController
+    public class ProductsController : Controller
     {
         private readonly ILogger _logger;
-        private readonly IProductsRepository _repository;
-        /**/
-
+        private readonly IRepository _repository;
+      
         public ProductsController(
-             IProductAppService customerAppService,
-            INotificationHandler<DomainNotification> notifications,
-            IMediatorHandler mediator) : base(notifications, mediator)
-        {
-           /* _logger = logger;
-            _repository = repository;*/
-        }
-/*
-        public ProductsController(
-            ILogger<ProductsController> logger, IProductsRepository repository)
+            ILogger<ProductsController> logger, IRepository repository)
         {
             _logger = logger;
             _repository = repository;
         }
-        */
         [HttpGet]
         public ActionResult<IEnumerable<Product>> Get([FromQuery]string name)
         {
@@ -48,9 +33,9 @@ namespace RefactorThis.Controllers
                 _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", name);
                 IEnumerable<Product> products;
                 if (String.IsNullOrEmpty(name))
-                    products = _repository.GetAllProducts();
+                    products = _repository.List<Product>().ToList();
                 else
-                    products = _repository.SearchByName(name);
+                    products = _repository.ListByName<Product>(name).ToList();
                 return new OkObjectResult(products.ToList());
             }
             catch (Exception exception)
@@ -68,11 +53,7 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetProduct(id);
-                if (product is null)
-                {
-                    return new NotFoundResult();
-                }
+                var product = _repository.GetById<Product>(id);
 
                 return new OkObjectResult(new Product()
                 {
@@ -94,10 +75,13 @@ namespace RefactorThis.Controllers
         [HttpPost]
         public void Post(Product product)
         {
+            _logger.LogInformation(LoggingEvents.AddProduct, "AddProduct {id}", product.Id);
+
             try
             {
                 Product item = SanitizeInput(product.Id, product);
-                _repository.AddProduct(item);
+                _repository.Add(item);
+                
             }
             catch (Exception exception)
             {
@@ -108,16 +92,23 @@ namespace RefactorThis.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        public void Update(Guid id, Product product)
+        public void Update(Guid id, Product input)
         {
+            _logger.LogInformation(LoggingEvents.UpdateProduct, "UpdateProduct {id}", input.Id);
+
             try
             {
-                Product orig = SanitizeInput(id, product);
-                _repository.UpdateProduct(orig);
+                Product sanitizedProduct = SanitizeInput(id, input);
+                var product = _repository.GetById<Product>(id);
+                product.Name = sanitizedProduct.Name;
+                product.Description = sanitizedProduct.Description;
+
+
+                _repository.Update(product);
             }
             catch (Exception exception)
             {
-                _logger.LogError(LoggingEvents.UpdateProduct, exception, "UpdateProduct Exception {id}", product.Id);
+                _logger.LogError(LoggingEvents.UpdateProduct, exception, "UpdateProduct Exception {id}", input.Id);
                 throw ;
             }
         }
@@ -146,10 +137,12 @@ namespace RefactorThis.Controllers
         [HttpDelete]
         public void Delete(Guid id)
         {
+            _logger.LogInformation(LoggingEvents.DeleteProduct, "DeleteProduct {id}", id);
+
             try
             {
-                var product = _repository.GetProduct(id);
-                _repository.DeleteProduct(product);
+                var product = _repository.GetById<Product>(id);
+                _repository.Delete(product);
             }
             catch (Exception exception)
             {
@@ -162,9 +155,12 @@ namespace RefactorThis.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ProductOption>> GetProductOptions(Guid productId)
         {
+            _logger.LogInformation(LoggingEvents.GetProductOptions, "GetProductOptions {id}", productId);
+
             try
             {
-                return new OkObjectResult(_repository.GetProductOptions(productId));
+                var product = _repository.GetById<Product>(productId);
+                return new OkObjectResult(product.GetProductOptions());
             }
             catch (Exception exception)
             {
@@ -177,9 +173,12 @@ namespace RefactorThis.Controllers
         [HttpGet]
         public ActionResult<ProductOption> GetProductOption(Guid productId, Guid id)
         {
+            _logger.LogInformation(LoggingEvents.GetProductOption, "GetProductOption  productId: {productId} id: {id}", productId, id);
+
             try
             {
-                var item = _repository.GetProductOption(productId, id);
+                var product = _repository.GetById<Product>(productId);
+                var item = product.GetProductOption(id);
                 return new OkObjectResult(item);
             }
             catch (Exception exception)
@@ -193,10 +192,14 @@ namespace RefactorThis.Controllers
         [HttpPost]
         public void AddProductOption(Guid productId, ProductOption option)
         {
+            _logger.LogInformation(LoggingEvents.AddProductOption, "AddProductOption  productId: {productId} id: {id}", productId, option.Id);
+
             try
             {
                 option.ProductId = productId;
-                _repository.AddProductOption(option);
+                var product = _repository.GetById<Product>(productId);
+                product.ProductOptions.Add(option);
+                _repository.Update(product); 
             }
             catch (Exception exception)
             {
@@ -209,16 +212,18 @@ namespace RefactorThis.Controllers
         [HttpPut]
         public void UpdateOption(Guid productId, Guid id, ProductOption option)
         {
+            _logger.LogInformation(LoggingEvents.UpdateProductOption, "UpdateProductOption productId: {productId} id: {id}", productId, option.Id);
+
             try
             {
-                var orig = new ProductOption
-                {
-                    Id = id,
-                    Name = option.Name,
-                    Description = option.Description,
-                    ProductId = productId
-                };
-                _repository.UpdateProductOption(orig);
+                var product = _repository.GetById<Product>(productId);
+
+                var productOption = product.GetProductOption(id);
+
+                productOption.Name = option.Name;
+                productOption.Description = option.Description;
+
+                _repository.Update(product);
             }
             catch (Exception exception)
             {
@@ -233,7 +238,10 @@ namespace RefactorThis.Controllers
         {
             try
             {
-                _repository.DeleteProductOption(productId, id);
+                var product = _repository.GetById<Product>(productId);
+                var productOption = product.GetProductOption(id);
+                product.ProductOptions.Remove(productOption);
+                _repository.Update(product);
             }
             catch (Exception exception)
             {

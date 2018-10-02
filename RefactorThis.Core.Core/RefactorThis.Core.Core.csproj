@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Events\ToDoItemCompletedEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Events\ToDoItemCompletedEvent.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ardalis.GuardClauses" Version="1.2.3" />
+  </ItemGroup>
+
+</Project>

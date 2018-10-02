@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RefactorThis.Core.Domain.Interfaces;
-using RefactorThis.Core.Infra.Data.Context;
-using RefactorThis.Core.Infra.Data.Repository;
+using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
+using RefactorThis.Infrastructure;
+using RefactorThis.Infrastructure.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace RefactorThis.Core
@@ -26,7 +26,7 @@ namespace RefactorThis.Core
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<IProductsRepository, ProductsRepository>();
+            services.AddScoped<IRepository, EfRepository>();
             services.AddScoped<IProductsContext, ProductsContext>();
             //  services.AddScoped<ILogger, Logger>();
             services.AddSwaggerGen(c =>

@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -41,9 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RefactorThis.Core.Application\RefactorThis.Core.Application.csproj" />
-    <ProjectReference Include="..\RefactorThis.Core.Domain1\RefactorThis.Core.Domain.csproj" />
-    <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Core\RefactorThis.Core.Core.csproj" />
+    <ProjectReference Include="..\RefactorThis.Infrastructure\RefactorThis.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

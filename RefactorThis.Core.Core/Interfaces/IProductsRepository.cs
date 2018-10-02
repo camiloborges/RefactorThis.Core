@@ -1,21 +1,22 @@
-﻿using System;
+﻿using RefactorThis.Core.Models;
+using System;
 using System.Collections.Generic;
 
-namespace RefactorThis.Core.Domain.Interfaces
+namespace RefactorThis.Core.Interfaces
 {
-    public interface IProductsRepository: IRepository<Product>
+    public interface IProductsRepository: IRepository
     {
-        IEnumerable<Product> Items { get; }
+      //  IEnumerable<Product> Items { get; }
 
-        IEnumerable<Product> GetAllProducts();
+        //IEnumerable<Product> GetAllProducts();
 
-        Product GetProduct(Guid productId);
+      //  Product GetProduct(Guid productId);
 
-        Product AddProduct(Product product);
+    //    Product AddProduct(Product product);
 
-        Product UpdateProduct(Product product);
+      //  Product UpdateProduct(Product product);
 
-        bool DeleteProduct(Product product);
+        //bool DeleteProduct(Product product);
 
         ProductOption GetProductOption(Guid productId, Guid optionId);
 

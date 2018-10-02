@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RefactorThis.Core.Domain1\RefactorThis.Core.Domain.csproj" />
-    <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

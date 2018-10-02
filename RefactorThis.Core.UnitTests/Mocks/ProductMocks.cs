@@ -65,7 +65,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
             }
         }
 
-        public static IEnumerable<Product> ProductsBaseDataset
+        public static List<Product> ProductsBaseDataset
         {
             get
             {
@@ -103,7 +103,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
             }
         }
 
-        public static IEnumerable<Product> ProductsWithNoOptions
+        public static List<Product> ProductsWithNoOptions
         {
             get
             {
@@ -111,11 +111,11 @@ namespace RefactorThis.Core.UnitTests.Mocks
                 {
                     p.ProductOptions = new List<ProductOption>();
                     return p;
-                });
+                }).ToList();
             }
         }
 
-        public static IEnumerable<Product> ProductsWithNullOptions
+        public static List<Product> ProductsWithNullOptions
         {
             get
             {
@@ -123,7 +123,7 @@ namespace RefactorThis.Core.UnitTests.Mocks
                 {
                     p.ProductOptions = null;
                     return p;
-                });
+                }).ToList();
             }
         }
 

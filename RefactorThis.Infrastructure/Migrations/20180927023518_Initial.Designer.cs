@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RefactorThis.Core.Models;
+using RefactorThis.Infrastructure.Data;
 
 namespace RefactorThis.Core.Migrations
 {
     [DbContext(typeof(ProductsContext))]
-    [Migration("20180927023717_ProductProductOptionsKeys")]
-    partial class ProductProductOptionsKeys
+    [Migration("20180927023518_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,17 +57,7 @@ namespace RefactorThis.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("ProductOption");
-                });
-
-            modelBuilder.Entity("RefactorThis.Core.Models.ProductOption", b =>
-                {
-                    b.HasOne("RefactorThis.Core.Models.Product")
-                        .WithMany("ProductOptions")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

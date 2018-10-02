@@ -2,14 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RefactorThis.Controllers;
+using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
-using RefactorThis.Core.Repository;
 using RefactorThis.Core.UnitTests.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Xunit.Extensions.AssertExtensions;
+using RefactorThis.Core.Core.Extensions;
 
 namespace RefactorThis.Core.UnitTests
 {
@@ -19,8 +20,8 @@ namespace RefactorThis.Core.UnitTests
         public void GetAllProductsReturnsAllItems()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.GetAllProducts()).Returns(ProductMocks.ProductsBaseDataset);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.List<Product>()).Returns(ProductMocks.ProductsBaseDataset);
 
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.Get(null);
@@ -34,8 +35,8 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductByNameReturnsSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.SearchByName("Galaxy")).Returns(ProductMocks.ProductsBaseDataset);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.ListByName<Product>("Galaxy")).Returns(ProductMocks.ProductsBaseDataset);
 
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.Get("Galaxy");
@@ -52,8 +53,9 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductByNameThatDoesntExistReturnsEmpty()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.SearchByName("Microsoft")).Returns(new List<Product>());
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.ListByName<Product>("Microsoft")).Returns(new List<Product>());
+
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.Get("Microsoft");
             var resultValue = Assert.IsType<OkObjectResult>(result.Result);
@@ -66,8 +68,8 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductByIdReturnsSucessAndWithOptions()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.GetProduct(ProductMocks.ProductSamsungGalaxyS7.Id)).Returns(ProductMocks.ProductSamsungGalaxyS7);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.GetById<Product>(ProductMocks.ProductSamsungGalaxyS7.Id)).Returns(ProductMocks.ProductSamsungGalaxyS7);
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.GetProduct(ProductMocks.ProductSamsungGalaxyS7.Id);
             var resultValue = Assert.IsType<OkObjectResult>(result.Result);
@@ -82,9 +84,9 @@ namespace RefactorThis.Core.UnitTests
         public void AddProductSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.AddProduct(ProductMocks.NewProductiPhoneXS)).Returns(ProductMocks.NewProductiPhoneXS);
-            repo.Setup(r => r.GetProduct(ProductMocks.NewProductiPhoneXS.Id)).Returns(ProductMocks.NewProductiPhoneXS);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.Add(ProductMocks.NewProductiPhoneXS)).Returns(ProductMocks.NewProductiPhoneXS);
+            repo.Setup(r => r.GetById<Product>(ProductMocks.NewProductiPhoneXS.Id)).Returns(ProductMocks.NewProductiPhoneXS);
 
             var controller = new ProductsController(logger.Object, repo.Object);
             controller.Post(ProductMocks.NewProductiPhoneXS);
@@ -104,8 +106,8 @@ namespace RefactorThis.Core.UnitTests
             var targetProduct = ProductMocks.NewProductiPhoneXS;
             var targetId = targetProduct.Id;
 
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.AddProduct(It.IsAny<Product>())).Throws<InvalidOperationException>();
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.Add(It.IsAny<Product>())).Throws<InvalidOperationException>();
             var controller = new ProductsController(logger.Object, repo.Object);
 
             Assert.Throws<InvalidOperationException>(() => controller.Post(targetProduct));
@@ -115,8 +117,10 @@ namespace RefactorThis.Core.UnitTests
         public void UpdateProductNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.UpdateProduct(It.IsAny<Product>())).Throws<KeyNotFoundException>();
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Throws<KeyNotFoundException>();
+
+            repo.Setup(r => r.Update(It.IsAny<Product>())).Throws<KeyNotFoundException>();
 
             var controller = new ProductsController(logger.Object, repo.Object);
             Assert.Throws<KeyNotFoundException>(() => controller.Update(ProductMocks.NewProductiPhoneXS.Id, ProductMocks.NewProductiPhoneXS));
@@ -126,9 +130,10 @@ namespace RefactorThis.Core.UnitTests
         public void UpdateProductSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.UpdateProduct(ProductMocks.ProductSamsungGalaxyS7Updated)).Returns(ProductMocks.ProductSamsungGalaxyS7Updated);
-
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.Update(It.IsAny<Product>())).Verifiable();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
+            
             var controller = new ProductsController(logger.Object, repo.Object);
             controller.Update(ProductMocks.ProductSamsungGalaxyS7Updated.Id, ProductMocks.ProductSamsungGalaxyS7Updated);
 
@@ -139,8 +144,9 @@ namespace RefactorThis.Core.UnitTests
         public void DeleteProductSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.DeleteProduct(ProductMocks.ProductSamsungGalaxyS7)).Returns(true);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
+            repo.Setup(r => r.Delete(It.IsAny<Product>())).Verifiable();
             var controller = new ProductsController(logger.Object, repo.Object);
             controller.Delete(ProductMocks.ProductSamsungGalaxyS7.Id);
             repo.Verify();
@@ -150,8 +156,8 @@ namespace RefactorThis.Core.UnitTests
         public void DeleteProductNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.DeleteProduct(It.IsAny<Product>())).Throws<KeyNotFoundException>();
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.Delete(It.IsAny<Product>())).Throws<KeyNotFoundException>();
             var controller = new ProductsController(logger.Object, repo.Object);
             Assert.Throws<KeyNotFoundException>(() => controller.Delete(ProductMocks.ProductSamsungGalaxyS7.Id));
             repo.Verify();
@@ -161,8 +167,8 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductOptionsSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.GetProductOptions(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7.ProductOptions);
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
             var controller = new ProductsController(logger.Object, repo.Object);
 
             var result = controller.GetProductOptions(ProductMocks.ProductSamsungGalaxyS7.Id);
@@ -176,8 +182,8 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductOptionsNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.GetProductOptions(It.IsAny<Guid>())).Throws<KeyNotFoundException>();
+            var repo = new Mock<IRepository>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Throws<KeyNotFoundException>();
             var controller = new ProductsController(logger.Object, repo.Object);
 
             Assert.Throws<KeyNotFoundException>(() => controller.GetProductOptions(ProductMocks.ProductSamsungGalaxyS7.Id));
@@ -188,10 +194,10 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductOptionSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
             var targetOption = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
 
-            repo.Setup(r => r.GetProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(targetOption);
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.GetProductOption(targetOption.ProductId, targetOption.Id);
             var resultValue = Assert.IsType<OkObjectResult>(result.Result);
@@ -204,10 +210,10 @@ namespace RefactorThis.Core.UnitTests
         public void GetProductOptionNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
             var targetOption = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
 
-            repo.Setup(r => r.GetProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Throws<KeyNotFoundException>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Throws<KeyNotFoundException>();
             var controller = new ProductsController(logger.Object, repo.Object);
             Assert.Throws<KeyNotFoundException>(() => controller.GetProductOption(targetOption.ProductId, targetOption.Id));
             repo.Verify();
@@ -217,13 +223,16 @@ namespace RefactorThis.Core.UnitTests
         public void UpdateProductOptionSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
 
             var option = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
             option.Name = "UpdatedName";
             option.Description = "UpdatedDescription";
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
+            repo.Setup(r => r.Update(It.IsAny<Product>())).Verifiable();;
+
             var controller = new ProductsController(logger.Object, repo.Object);
-            repo.Setup(r => r.UpdateProductOption(It.IsAny<ProductOption>())).Returns(null);
+
             controller.UpdateOption(option.ProductId, option.Id, option);
             repo.Verify();
         }
@@ -232,13 +241,15 @@ namespace RefactorThis.Core.UnitTests
         public void UpdateProductOptionNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
 
             var option = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
             option.Name = "UpdatedName";
             option.Description = "UpdatedDescription";
             var controller = new ProductsController(logger.Object, repo.Object);
-            repo.Setup(r => r.UpdateProductOption(It.IsAny<ProductOption>())).Throws<KeyNotFoundException>();
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
+
+            repo.Setup(r => r.Update(It.IsAny<Product>())).Throws<KeyNotFoundException>();
             Assert.Throws<KeyNotFoundException>(() => controller.UpdateOption(option.ProductId, option.Id, option));
             repo.Verify();
         }
@@ -247,13 +258,15 @@ namespace RefactorThis.Core.UnitTests
         public void DeleteProductOptionSuccess()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
 
             var option = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
             option.Name = "UpdatedName";
             option.Description = "UpdatedDescription";
             var controller = new ProductsController(logger.Object, repo.Object);
-            repo.Setup(r => r.DeleteProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Returns(null);
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Returns(ProductMocks.ProductSamsungGalaxyS7);
+
+            repo.Setup(r => r.Update<Product>(It.IsAny<Product>())).Verifiable();
             controller.DeleteOption(option.ProductId, option.Id);
             repo.Verify();
         }
@@ -262,13 +275,14 @@ namespace RefactorThis.Core.UnitTests
         public void DeleteProductOptionNotFoundError()
         {
             var logger = new Mock<ILogger<ProductsController>>();
-            var repo = new Mock<IProductsRepository>();
+            var repo = new Mock<IRepository>();
 
             var option = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
             option.Name = "UpdatedName";
             option.Description = "UpdatedDescription";
             var controller = new ProductsController(logger.Object, repo.Object);
-            repo.Setup(r => r.DeleteProductOption(It.IsAny<Guid>(), It.IsAny<Guid>())).Throws<KeyNotFoundException>();
+           
+            repo.Setup(r => r.GetById<Product>(It.IsAny<Guid>())).Throws<KeyNotFoundException>();
             Assert.Throws<KeyNotFoundException>(() => controller.DeleteOption(option.ProductId, option.Id));
             repo.Verify();
         }

@@ -1,17 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using RefactorThis.Core.Domain;
-using RefactorThis.Core.Domain.Core;
-using RefactorThis.Core.Domain.Interfaces;
-using RefactorThis.Core.Infra.Data.Context;
+using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RefactorThis.Core.Infra.Data.Repository
+namespace RefactorThis.Infrastructure.Data
 {
-    public sealed class ProductsRepository : IProductsRepository
+    public sealed class ProductsRepository : EfRepository, IProductsRepository
     {
         public IEnumerable<Product> Items { get; private set; }
         private ILogger<ProductsRepository> _logger;

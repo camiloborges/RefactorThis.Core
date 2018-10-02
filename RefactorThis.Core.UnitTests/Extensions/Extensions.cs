@@ -1,4 +1,5 @@
 ﻿using RefactorThis.Core.Models;
+using RefactorThis.Infrastructure.Data;
 using System.Collections.Generic;
 
 public static class RefactorThisExtensions
