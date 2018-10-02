@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
+using RefactorThis.Core.Domain;
+using RefactorThis.Core.Domain.Core;
+using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Models;
-using RefactorThis.Core.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

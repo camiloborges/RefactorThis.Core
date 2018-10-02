@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RefactorThis.Core.Models
+namespace RefactorThis.Core.Domain
 {
     public partial class ProductOption
     {

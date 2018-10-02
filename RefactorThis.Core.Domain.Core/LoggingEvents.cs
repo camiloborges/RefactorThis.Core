@@ -1,4 +1,4 @@
-﻿namespace RefactorThis.Core
+﻿namespace RefactorThis.Core.Domain.Core
 {
     public static class LoggingEvents
     {

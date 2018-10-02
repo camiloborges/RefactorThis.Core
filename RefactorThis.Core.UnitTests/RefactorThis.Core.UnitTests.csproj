@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RefactorThis.Core\RefactorThis.Core.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core\RefactorThis.Core.API.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace RefactorThis.Core.Models
+namespace RefactorThis.Core.Domain
 {
     public partial class Product
     {

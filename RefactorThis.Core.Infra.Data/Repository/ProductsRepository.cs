@@ -1,18 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using RefactorThis.Core.Domain;
+using RefactorThis.Core.Domain.Core;
+using RefactorThis.Core.Domain.Interfaces;
+using RefactorThis.Core.Infra.Data.Context;
 using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RefactorThis.Core.Repository
+namespace RefactorThis.Core.Infra.Data.Repository
 {
-    public class ProductsRepository : IProductsRepository
+    public sealed class ProductsRepository : IProductsRepository
     {
         public IEnumerable<Product> Items { get; private set; }
         private ILogger<ProductsRepository> _logger;
         private IProductsContext _context;
 
+        
+//        public override Dispose(bool )
         public ProductsRepository(IProductsContext dataContext, ILogger<ProductsRepository> logger)
         {
             _context = dataContext;
@@ -132,6 +138,47 @@ namespace RefactorThis.Core.Repository
 
             _context.ProductOption.Remove(productOption);
             return _context.SaveContextChanges();
+        }
+
+        public void Add(Product obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Product GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Product> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Product obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void qDispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

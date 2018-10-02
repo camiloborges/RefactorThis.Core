@@ -1,10 +1,9 @@
-﻿using RefactorThis.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace RefactorThis.Core.Repository
+namespace RefactorThis.Core.Domain.Interfaces
 {
-    public interface IProductsRepository
+    public interface IProductsRepository: IRepository<Product>
     {
         IEnumerable<Product> Items { get; }
 
