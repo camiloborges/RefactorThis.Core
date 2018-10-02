@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using RefactorThis.Core.Domain;
 using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RefactorThis.Core.Repository
+namespace RefactorThis.Core.Infrastructure
 {
     public class ProductsRepository : IProductsRepository
     {

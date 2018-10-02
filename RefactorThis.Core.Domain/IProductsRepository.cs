@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RefactorThis.Core.Repository
+namespace RefactorThis.Core.Domain
 {
     public interface IProductsRepository
     {

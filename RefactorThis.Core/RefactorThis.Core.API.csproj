@@ -18,10 +18,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\DomainEventHandlers\" />
+    <Folder Include="Application\Models\" />
+    <Folder Include="Application\Validations\" />
+    <Folder Include="DbContext\" />
+    <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.0.100" />
+    <PackageReference Include="MediatR" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
@@ -37,6 +44,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infrastructure\RefactorThis.Core.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
