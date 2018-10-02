@@ -236,6 +236,8 @@ namespace RefactorThis.Controllers
         [HttpDelete]
         public void DeleteOption(Guid productId, Guid id)
         {
+            _logger.LogInformation(LoggingEvents.DeleteProductOption, "DeleteProductOption productId: {productId} id: {id}", productId, id);
+
             try
             {
                 var product = _repository.GetById<Product>(productId);
