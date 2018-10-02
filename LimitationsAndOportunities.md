@@ -6,6 +6,7 @@ This challenge was completed in around 12 hrs and since it is a refactoring job 
 - It should have an automated CI/CD pipeline
 - Exception handling is a bit rough
 - Dev ConnectionString has hardcoded path. 
+- A lot of the exception handling is copy/paste. Is there any smart way to keep code defensive but still DRY?
 ## opportunities
 - change constructors to use ILoggerFactory instead of ILogger
 - Ensure BadResponses are always returned when exceptions happen
