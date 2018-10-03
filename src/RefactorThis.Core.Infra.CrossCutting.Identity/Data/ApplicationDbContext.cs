@@ -1,8 +1,8 @@
-﻿using System.IO;
-using RefactorThis.Core.Infra.CrossCutting.Identity.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using RefactorThis.Core.Infra.CrossCutting.Identity.Models;
+using System.IO;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Identity.Data
 {

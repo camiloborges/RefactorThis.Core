@@ -5,24 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="CommandHandlers\CreateProductCommandHandler.cs" />
-    <Compile Remove="CommandHandlers\CreateProductOptionCommandHandler.cs" />
-    <Compile Remove="CommandHandlers\RemoveProductCommandHandler.cs" />
-    <Compile Remove="CommandHandlers\RemoveProductOptionCommandHandler.cs" />
-    <Compile Remove="CommandHandlers\UpdateProductCommandHandler.cs" />
-    <Compile Remove="CommandHandlers\UpdateProductOptionCommandHandler.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="CommandHandlers\CreateProductCommandHandler.cs" />
-    <Content Include="CommandHandlers\CreateProductOptionCommandHandler.cs" />
-    <Content Include="CommandHandlers\RemoveProductCommandHandler.cs" />
-    <Content Include="CommandHandlers\RemoveProductOptionCommandHandler.cs" />
-    <Content Include="CommandHandlers\UpdateProductCommandHandler.cs" />
-    <Content Include="CommandHandlers\UpdateProductOptionCommandHandler.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

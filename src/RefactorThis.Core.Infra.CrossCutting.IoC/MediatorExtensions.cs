@@ -1,6 +1,3 @@
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using RefactorThis.Core.Domain.CommandHandlers;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -16,7 +13,6 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
             foreach (var type in classTypes)
             {
                 var interfaces = type.ImplementedInterfaces.Select(i => i.GetTypeInfo());
-
 
                 foreach (var handlerType in interfaces.Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)))
                 {

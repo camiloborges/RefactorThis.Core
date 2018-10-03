@@ -3,7 +3,7 @@ using System;
 
 namespace RefactorThis.Core.Domain.Core.Notifications
 {
-    public class DomainNotification : Event
+    public class DomainNotification : DomainEvent
     {
         public Guid DomainNotificationId { get; private set; }
         public string Key { get; private set; }

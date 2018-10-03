@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using RefactorThis.Core;
 using RefactorThis.Core.Application.Interfaces;
 using RefactorThis.Core.Application.ViewModels;
 using RefactorThis.Core.Controllers;
@@ -9,8 +8,6 @@ using RefactorThis.Core.Domain;
 using RefactorThis.Core.Domain.Core;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Core.Notifications;
-using RefactorThis.Core.Domain.Interfaces;
-using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +19,8 @@ namespace RefactorThis.Controllers
     public class ProductsController : ApiController
     {
         private readonly ILogger _logger;
-     //   private readonly IProductsRepository _repository;
+
+        //   private readonly IProductsRepository _repository;
         private readonly IProductAppService _service;
 
         public ProductsController(
@@ -34,13 +32,13 @@ namespace RefactorThis.Controllers
             _logger = logger;
             _service = productAppService;
         }
-       
+
         [HttpGet]
         public ActionResult<IEnumerable<ProductViewModel>> Get([FromQuery]string name)
         {
             try
             {
-                _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", (name??""));
+                _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", (name ?? ""));
                 IEnumerable<ProductViewModel> products;
                 if (String.IsNullOrEmpty(name))
                     products = _service.GetAll();
@@ -51,7 +49,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetAll, exception, "Getting Exception {name}", name);
-                throw ;
+                throw;
             }
         }
 
@@ -74,7 +72,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.GetProduct, exception, "GetProduct Exception {id}", id);
-                throw ;
+                throw;
             }
         }
 
@@ -83,13 +81,13 @@ namespace RefactorThis.Controllers
         {
             try
             {
-              //  Product item = SanitizeInput(product.Id, product);
+                //  Product item = SanitizeInput(product.Id, product);
                 _service.Create(product);
             }
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.AddProduct, exception, "AddProduct Exception {id}", product.Id);
-                throw ;
+                throw;
             }
         }
 
@@ -99,13 +97,21 @@ namespace RefactorThis.Controllers
         {
             try
             {
-               // Product orig = SanitizeInput(id, product);
-                _service.Update(product);
+                // Product orig = SanitizeInput(id, product);
+                _service.Update(new ProductViewModel()
+                {
+                    Id = id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    DeliveryPrice = product.DeliveryPrice,
+                    ProductOptions = product.ProductOptions
+                });
             }
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.UpdateProduct, exception, "UpdateProduct Exception {id}", product.Id);
-                throw ;
+                throw;
             }
         }
 
@@ -140,7 +146,6 @@ namespace RefactorThis.Controllers
                     throw new KeyNotFoundException();
 
                 _service.Remove(id);
-                
             }
             catch (Exception exception)
             {
@@ -192,7 +197,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.AddProductOption, exception, "AddProductOption Exception productId {productId} id {id}", productId, option.Id);
-                throw ;
+                throw;
             }
         }
 
@@ -207,7 +212,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.UpdateProductOption, exception, "UpdateProductOption Exception productId {productId} id {id}", productId, id);
-                throw ;
+                throw;
             }
         }
 
@@ -222,7 +227,7 @@ namespace RefactorThis.Controllers
             catch (Exception exception)
             {
                 _logger.LogError(LoggingEvents.DeleteProductOption, exception, "DeleteOption Exception productId {productId} id {id}", productId, id);
-                throw ;
+                throw;
             }
         }
     }

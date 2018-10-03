@@ -11,12 +11,12 @@ namespace Refactortis.Core.Application.AutoMapper
     {
         public ViewModelToDomainMappingProfile()
         {
-            CreateMap<ProductViewModel, Product >();
+            CreateMap<ProductViewModel, Product>();
             CreateMap<ProductOptionViewModel, ProductOption>();
             CreateMap<ProductViewModel, CreateProductCommand>()
                 .ConstructUsing(c => new CreateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO().ToList()));
             CreateMap<ProductViewModel, UpdateProductCommand>()
-                .ConstructUsing(c => new UpdateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO().ToList()));
+                .ConstructUsing(c => new UpdateProductCommand(c.Id, c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO().ToList()));
         }
     }
 }

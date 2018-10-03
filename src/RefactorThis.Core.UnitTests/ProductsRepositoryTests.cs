@@ -284,6 +284,7 @@ namespace RefactorThis.Core.UnitTests
                 var option = ProductMocks.ProductSamsungGalaxyS7.ProductOptions.First();
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
+
                 Assert.Throws<KeyNotFoundException>(() => repository.DeleteProductOption(option.ProductId, option.Id));
             }
         }

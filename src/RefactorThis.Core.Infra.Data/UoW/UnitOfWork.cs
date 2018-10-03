@@ -1,5 +1,4 @@
-﻿
-using RefactorThis.Core.Domain.Interfaces;
+﻿using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Models;
 using System;
 

@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace RefactorThis.Core.Api.Configurations
 {
@@ -29,6 +29,5 @@ namespace RefactorThis.Core.Api.Configurations
 
             return builder;
         }
-
     }
 }

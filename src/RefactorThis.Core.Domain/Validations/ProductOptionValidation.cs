@@ -1,10 +1,13 @@
-﻿using System;
-using FluentValidation;
+﻿using FluentValidation;
 using RefactorThis.Core.Domain.Commands;
+using System;
 
 namespace RefactorThis.Core.Domain.Validations
 {
+#pragma warning disable CA1710 // Identifiers should have correct suffix
+
     public abstract class ProductOptionValidation<T> : AbstractValidator<T> where T : ProductOptionCommand
+#pragma warning restore CA1710 // Identifiers should have correct suffix
     {
         protected void ValidateName()
         {
@@ -27,7 +30,5 @@ namespace RefactorThis.Core.Domain.Validations
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty);
         }
-
-
     }
 }

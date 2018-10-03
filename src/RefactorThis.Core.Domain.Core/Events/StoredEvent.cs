@@ -2,9 +2,9 @@
 
 namespace RefactorThis.Core.Domain.Core.Events
 {
-    public class StoredEvent : Event
+    public class StoredEvent : DomainEvent
     {
-        public StoredEvent(Event theEvent, string data, string user)
+        public StoredEvent(DomainEvent theEvent, string data, string user)
         {
             Id = Guid.NewGuid();
             AggregateId = theEvent.AggregateId;

@@ -1,7 +1,7 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using RefactorThis.Core.Domain.Events;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Domain.EventHandlers
 {

@@ -25,9 +25,12 @@ namespace RefactorThis.Core.Domain
         [DisplayName("Description")]
         public string Description { get; set; }
 
-        public ProductOption() { }
+        public ProductOption()
+        {
+        }
 
-        public ProductOption(Guid id, Guid productId, string name, string description) {
+        public ProductOption(Guid id, Guid productId, string name, string description)
+        {
             Id = id;
             ProductId = productId;
             Name = name;

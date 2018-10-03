@@ -1,14 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Moq;
-using RefactorThis.Controllers;
-using RefactorThis.Core.Domain.Interfaces;
-using RefactorThis.Core.UnitTests.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Xunit;
-using Xunit.Extensions.AssertExtensions;
 
 namespace RefactorThis.Core.UnitTests
 {
@@ -71,6 +63,7 @@ namespace RefactorThis.Core.UnitTests
             var result = controller.GetProduct(ProductMocks.ProductSamsungGalaxyS7.Id);
             var resultValue = Assert.IsType<OkObjectResult>(result.Result);
             var okResult = Assert.IsType<Product>(resultValue.Value);
+
             repo.Verify();
             okResult.Id.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Id);
             okResult.Name.ShouldEqual(ProductMocks.ProductSamsungGalaxyS7.Name);

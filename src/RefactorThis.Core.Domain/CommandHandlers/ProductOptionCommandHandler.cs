@@ -1,16 +1,15 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using RefactorThis.Core.Domain;
-using RefactorThis.Core.Domain.CommandHandlers;
+﻿using MediatR;
 using RefactorThis.Core.Domain.Commands;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Core.Notifications;
 using RefactorThis.Core.Domain.Events;
 using RefactorThis.Core.Domain.Interfaces;
+using System;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Refactorthis.Core.Domain.CommandHandlers
+namespace RefactorThis.Core.Domain.CommandHandlers
 {
     public class ProductOptionCommandHandler : CommandHandler,
         IRequestHandler<UpdateProductOptionCommand>,
@@ -21,10 +20,10 @@ namespace Refactorthis.Core.Domain.CommandHandlers
         private readonly IProductsRepository _repository;
         private readonly IMediatorHandler Bus;
 
-        public ProductOptionCommandHandler(IProductsRepository productRepository, 
+        public ProductOptionCommandHandler(IProductsRepository productRepository,
                                       IUnitOfWork uow,
                                       IMediatorHandler bus,
-                                      INotificationHandler<DomainNotification> notifications) :base(uow, bus, notifications)
+                                      INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _repository = productRepository;
             Bus = bus;
@@ -36,17 +35,16 @@ namespace Refactorthis.Core.Domain.CommandHandlers
             {
                 NotifyValidationErrors(message);
                 return Unit.Task;
-
             }
 
-            var productOption = new ProductOption(Guid.NewGuid(), message.ProductId,  message.Name, message.Description);
+            var productOption = new ProductOption(Guid.NewGuid(), message.ProductId, message.Name, message.Description);
 
             var existingProduct = _repository.GetById(message.ProductId);
 
             if (existingProduct != null)
             {
-                var busMessage = String.Format("This product id ({0}) is already taken.", message.Id);
-                Bus.RaiseEvent(new DomainNotification(message.MessageType, busMessage));
+                var busMessage = String.Format(CultureInfo.InvariantCulture, "This product id ({0}) is already taken.", message.Id);
+                Bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, busMessage));
                 return Unit.Task;
             }
             existingProduct.ProductOptions.Add(productOption);
@@ -54,10 +52,10 @@ namespace Refactorthis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductOptionRemovedEvent(productOption.Id, productOption.ProductId));
+                Bus.RaiseMediatorEvent(new ProductOptionRemovedEvent(productOption.Id, productOption.ProductId));
             }
 
-            return Unit.Task ;
+            return Unit.Task;
         }
 
         public Task<Unit> Handle(UpdateProductOptionCommand message, CancellationToken cancellationToken)
@@ -69,20 +67,20 @@ namespace Refactorthis.Core.Domain.CommandHandlers
             }
 
             var product = new ProductOption(message.Id, message.ProductId, message.Name, message.Description);
-            var existingOption= _repository.GetProductOption(message.ProductId,message.Id);
+            var existingOption = _repository.GetProductOption(message.ProductId, message.Id);
 
-            if (existingOption == null )
+            if (existingOption == null)
             {
-                var busMessage = String.Format("This product id ({0}) doesn't exist.", message.Id);
-                Bus.RaiseEvent(new DomainNotification(message.MessageType, busMessage));
+                var busMessage = String.Format(CultureInfo.InvariantCulture, "This product id ({0}) doesn't exist.", message.Id);
+                Bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, busMessage));
                 return Unit.Task;
             }
-               
+
             _repository.UpdateProductOption(product);
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductOptionUpdatedEvent(product.Id, product.ProductId));
+                Bus.RaiseMediatorEvent(new ProductOptionUpdatedEvent(product.Id, product.ProductId));
             }
 
             return Unit.Task;
@@ -100,7 +98,7 @@ namespace Refactorthis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductRemovedEvent(message.Id));
+                Bus.RaiseMediatorEvent(new ProductRemovedEvent(message.Id));
             }
 
             return Unit.Task;

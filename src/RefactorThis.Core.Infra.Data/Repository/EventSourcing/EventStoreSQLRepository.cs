@@ -1,8 +1,8 @@
-﻿    using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using RefactorThis.Core.Domain.Core.Events;
 using RefactorThis.Core.Infra.Data.Context;
-using RefactorThis.Core.Domain.Core.Events;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace RefactorThis.Core.Infra.Data.Repository.EventSourcing
 {
@@ -28,7 +28,6 @@ namespace RefactorThis.Core.Infra.Data.Repository.EventSourcing
 
         public void Dispose()
         {
-            
             _context.Dispose();
             GC.SuppressFinalize(this);
         }

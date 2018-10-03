@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using RefactorThis.Core.Domain.Core.Events;
 
 namespace RefactorThis.Core.Infra.Data.Mappings
-{    
+{
     public class StoredEventMap : IEntityTypeConfiguration<StoredEvent>
     {
         public void Configure(EntityTypeBuilder<StoredEvent> builder)

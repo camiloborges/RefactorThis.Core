@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using RefactorThis.Core.Application.AutoMapper;
 using Refactortis.Core.Application.AutoMapper;
 
 namespace RefactorThis.Core.Application.AutoMapper

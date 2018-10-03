@@ -1,8 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using RefactorThis.Core.Infra.CrossCutting.Identity.Data;
+using System;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Identity.Migrations
 {
@@ -15,7 +15,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.Identity.Migrations
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Equinox.Infra.CrossCutting.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("RefactorThis.Core.Infra.CrossCutting.Identity.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -190,7 +190,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.Identity.Migrations
 
             modelBuilder.Entity("RefactorThis.Core.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Equinox.Infra.CrossCutting.Identity.Models.ApplicationUser")
+                    b.HasOne("RefactorThis.Core.Infra.CrossCutting.Identity.Models.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using RefactorThis.Core.Domain.Core.Bus;
+using RefactorThis.Core.Domain.Core.Notifications;
 using System.Collections.Generic;
 using System.Linq;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using RefactorThis.Core.Domain.Core.Notifications;
-using RefactorThis.Core.Domain.Core.Bus;
 
 namespace RefactorThis.Core.Controllers
 {
@@ -13,7 +13,7 @@ namespace RefactorThis.Core.Controllers
         private readonly DomainNotificationHandler _notifications;
         private readonly IMediatorHandler _mediator;
 
-        protected ApiController(INotificationHandler<DomainNotification> notifications, 
+        protected ApiController(INotificationHandler<DomainNotification> notifications,
                                 IMediatorHandler mediator)
         {
             _notifications = (DomainNotificationHandler)notifications;
@@ -57,7 +57,7 @@ namespace RefactorThis.Core.Controllers
 
         protected void NotifyError(string code, string message)
         {
-            _mediator.RaiseEvent(new DomainNotification(code, message));
+            _mediator.RaiseMediatorEvent(new DomainNotification(code, message));
         }
 
         protected void AddIdentityErrors(IdentityResult result)

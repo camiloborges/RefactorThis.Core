@@ -11,6 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MediatorExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MediatorExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RefactorThis.Core.Application\RefactorThis.Core.Application.csproj" />
     <ProjectReference Include="..\RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj" />
     <ProjectReference Include="..\RefactorThis.Core.Infra.CrossCutting.Bus\RefactorThis.Core.Infra.CrossCutting.Bus.csproj" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace RefactorThis.Core.Application.ViewModels
 {

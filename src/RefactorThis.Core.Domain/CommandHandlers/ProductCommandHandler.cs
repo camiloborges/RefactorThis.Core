@@ -1,17 +1,16 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using RefactorThis.Core.Domain;
-using RefactorThis.Core.Domain.CommandHandlers;
+﻿using MediatR;
 using RefactorThis.Core.Domain.Commands;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Core.Notifications;
 using RefactorThis.Core.Domain.Events;
 using RefactorThis.Core.Domain.Extensions;
 using RefactorThis.Core.Domain.Interfaces;
+using System;
+using System.Globalization;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Refactorthis.Core.Domain.CommandHandlers
+namespace RefactorThis.Core.Domain.CommandHandlers
 {
     public class ProductCommandHandler : CommandHandler,
         IRequestHandler<UpdateProductCommand>,
@@ -22,10 +21,10 @@ namespace Refactorthis.Core.Domain.CommandHandlers
         private readonly IProductsRepository _repository;
         private readonly IMediatorHandler Bus;
 
-        public ProductCommandHandler(IProductsRepository productRepository, 
+        public ProductCommandHandler(IProductsRepository productRepository,
                                       IUnitOfWork uow,
                                       IMediatorHandler bus,
-                                      INotificationHandler<DomainNotification> notifications) :base(uow, bus, notifications)
+                                      INotificationHandler<DomainNotification> notifications) : base(uow, bus, notifications)
         {
             _repository = productRepository;
             Bus = bus;
@@ -37,17 +36,17 @@ namespace Refactorthis.Core.Domain.CommandHandlers
             {
                 NotifyValidationErrors(message);
                 return Unit.Task;
-
             }
-            
-            var product = new Product(Guid.NewGuid(), message.Name, message.Description,message.Price, message.DeliveryPrice, message.ToProductOptions());
+
+            var product = new Product(Guid.NewGuid(), message.Name, message.Description, message.Price, message.DeliveryPrice, message.ToProductOptions());
 
             var existingProduct = _repository.GetById(product.Id);
 
             if (existingProduct != null)
             {
-                var busMessage = String.Format("This product id ({0}) is already taken.", message.Id);
-                Bus.RaiseEvent(new DomainNotification(message.MessageType, busMessage));
+                var busMessage = String.Format(CultureInfo.InvariantCulture, "This product id ({0}) is already taken.", message.Id);
+                Bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, busMessage));
+
                 return Unit.Task;
             }
 
@@ -55,10 +54,10 @@ namespace Refactorthis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductCreatedEvent(product.Id, product.Name, product.Description,product.Price, product.DeliveryPrice));
+                Bus.RaiseMediatorEvent(new ProductCreatedEvent(product.Id, product.Name, product.Description, product.Price, product.DeliveryPrice));
             }
 
-            return Unit.Task ;
+            return Unit.Task;
         }
 
         public Task<Unit> Handle(UpdateProductCommand message, CancellationToken cancellationToken)
@@ -70,12 +69,12 @@ namespace Refactorthis.Core.Domain.CommandHandlers
             }
 
             var product = new Product(message.Id, message.Name, message.Description, message.Price, message.DeliveryPrice, message.ToProductOptions());
-            var existingProduct= _repository.GetById(product.Id);
+            var existingProduct = _repository.GetById(product.Id);
 
-            if (existingProduct == null )
+            if (existingProduct == null)
             {
-                var busMessage = String.Format("This product id ({0}) doesn't exist.", message.Id);
-                Bus.RaiseEvent(new DomainNotification(message.MessageType, busMessage));
+                var busMessage = String.Format(CultureInfo.InvariantCulture, "This product id ({0}) doesn't exist.", message.Id);
+                Bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, busMessage));
                 return Unit.Task;
             }
 
@@ -83,7 +82,7 @@ namespace Refactorthis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductUpdatedEvent(product.Id, product.Name, product.Description, product.Price, product.DeliveryPrice));
+                Bus.RaiseMediatorEvent(new ProductUpdatedEvent(product.Id, product.Name, product.Description, product.Price, product.DeliveryPrice));
             }
 
             return Unit.Task;
@@ -101,7 +100,7 @@ namespace Refactorthis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseEvent(new ProductRemovedEvent(message.Id));
+                Bus.RaiseMediatorEvent(new ProductRemovedEvent(message.Id));
             }
 
             return Unit.Task;

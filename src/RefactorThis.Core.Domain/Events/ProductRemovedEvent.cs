@@ -1,9 +1,9 @@
-﻿using System;
-using RefactorThis.Core.Domain.Core.Events;
+﻿using RefactorThis.Core.Domain.Core.Events;
+using System;
 
 namespace RefactorThis.Core.Domain.Events
 {
-    public class ProductRemovedEvent : Event
+    public class ProductRemovedEvent : DomainEvent
     {
         public ProductRemovedEvent(Guid id)
         {

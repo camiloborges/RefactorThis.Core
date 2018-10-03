@@ -4,7 +4,7 @@ using System;
 
 namespace RefactorThis.Core.Infra.Data.Context
 {
-    public interface IProductsContext: IDisposable
+    public interface IProductsContext : IDisposable
     {
         DbSet<Product> Product { get; set; }
         DbSet<ProductOption> ProductOption { get; set; }

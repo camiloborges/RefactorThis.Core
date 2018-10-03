@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using RefactorThis.Core.Domain.Interfaces;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Identity.Models
 {
@@ -23,7 +23,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.Identity.Models
 
         public IEnumerable<Claim> GetClaimsIdentity()
         {
-            return  _accessor.HttpContext.User.Claims;
+            return _accessor.HttpContext.User.Claims;
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿
-using RefactorThis.Core.Application.ViewModels;
-using RefactorThis.Core.Domain;
+﻿using RefactorThis.Core.Application.ViewModels;
 using RefactorThis.Core.Domain.Commands;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Application.Extensions
 {

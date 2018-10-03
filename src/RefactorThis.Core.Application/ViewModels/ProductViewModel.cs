@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace RefactorThis.Core.Application.ViewModels
 {
@@ -26,6 +25,7 @@ namespace RefactorThis.Core.Application.ViewModels
         [Required(ErrorMessage = "The Price is Required")]
         [DisplayName("Price")]
         public decimal Price { get; set; }
+
         [Required(ErrorMessage = "The Delivery Price is Required")]
         [DisplayName("Delivery Price")]
         public decimal DeliveryPrice { get; set; }

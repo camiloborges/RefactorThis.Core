@@ -1,9 +1,8 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using RefactorThis.Core.Domain;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
+using RefactorThis.Core.Domain;
 using RefactorThis.Core.Infra.Data.Context;
+using System;
 
 namespace RefactorThis.Core.Models
 {

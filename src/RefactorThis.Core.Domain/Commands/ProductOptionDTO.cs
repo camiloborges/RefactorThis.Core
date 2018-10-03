@@ -3,7 +3,6 @@ using System;
 
 namespace RefactorThis.Core.Domain.Commands
 {
-
     public class ProductOptionDTO : Command
     {
         public Guid Id { get; set; }

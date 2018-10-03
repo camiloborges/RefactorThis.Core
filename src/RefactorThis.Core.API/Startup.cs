@@ -2,15 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RefactorThis.Core.Api.Configurations;
-using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Infra.CrossCutting.IoC;
-using RefactorThis.Core.Infra.Data.Context;
-using RefactorThis.Core.Infra.Data.Repository;
 using RefactorThis.Core.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
@@ -31,7 +27,7 @@ namespace RefactorThis.Core
         {
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            
+
             services.AddAutoMapperSetup();
             services.AddSwaggerGen(c =>
             {
@@ -41,7 +37,7 @@ namespace RefactorThis.Core
             services.AddDbContext<ProductsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Adding MediatR for Domain Events and Notifications
             services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
-            services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
+            //    services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
 
             RegisterServices(services);
         }
@@ -72,6 +68,7 @@ namespace RefactorThis.Core
 
             app.UseMvc();
         }
+
         private static void RegisterServices(IServiceCollection services)
         {
             // Adding dependencies from another layers (isolated from Presentation)

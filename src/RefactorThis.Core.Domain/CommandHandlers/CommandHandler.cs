@@ -23,7 +23,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
         {
             foreach (var error in message.ValidationResult.Errors)
             {
-                _bus.RaiseEvent(new DomainNotification(message.MessageType, error.ErrorMessage));
+                _bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, error.ErrorMessage));
             }
         }
 
@@ -32,7 +32,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
             if (_notifications.HasNotifications()) return false;
             if (_uow.Commit()) return true;
 
-            _bus.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
+            _bus.RaiseMediatorEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
             return false;
         }
     }

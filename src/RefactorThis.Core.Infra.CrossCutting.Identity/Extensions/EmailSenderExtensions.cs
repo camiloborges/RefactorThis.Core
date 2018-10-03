@@ -1,5 +1,3 @@
-using RefactorThis.Core.Infra.CrossCutting.Identity.Services;
-using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Identity.Extensions

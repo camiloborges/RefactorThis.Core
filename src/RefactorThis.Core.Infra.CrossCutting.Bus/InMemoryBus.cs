@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using MediatR;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Core.Commands;
 using RefactorThis.Core.Domain.Core.Events;
-using MediatR;
+using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Bus
 {
@@ -22,7 +22,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.Bus
             return _mediator.Send(command);
         }
 
-        public Task RaiseEvent<T>(T @event) where T : Event
+        public Task RaiseMediatorEvent<T>(T @event) where T : DomainEvent
         {
             if (!@event.MessageType.Equals("DomainNotification"))
                 _eventStore?.Save(@event);

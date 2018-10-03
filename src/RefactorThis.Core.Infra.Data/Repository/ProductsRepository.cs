@@ -4,7 +4,6 @@ using RefactorThis.Core.Domain;
 using RefactorThis.Core.Domain.Core;
 using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Infra.Data.Context;
-using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +16,13 @@ namespace RefactorThis.Core.Infra.Data.Repository
         private ILogger<ProductsRepository> _logger;
         private IProductsContext _context;
 
-        
-//        public override Dispose(bool )
+        //        public override Dispose(bool )
         public ProductsRepository(IProductsContext dataContext, ILogger<ProductsRepository> logger)
         {
             _context = dataContext;
             _logger = logger;
         }
-        
+
         public IQueryable<ProductOption> GetProductOptions(Guid productId)
         {
             var products = _context.ProductOption.Where(p => p.ProductId == productId);
@@ -41,7 +39,6 @@ namespace RefactorThis.Core.Infra.Data.Repository
             return option;
         }
 
-       
         public IQueryable<Product> SearchByName(string name)
         {
             var items = _context.Product.Where(p => p.Name.Contains(name, StringComparison.InvariantCulture));
@@ -64,7 +61,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             productOption.Description = orig.Description;
 
             _context.ProductOption.Update(productOption);
-            return _context.SaveContextChanges()>0;
+            return _context.SaveContextChanges() > 0;
         }
 
         public bool DeleteProductOption(Guid productId, Guid id)
@@ -74,7 +71,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
                 throw new KeyNotFoundException();
 
             _context.ProductOption.Remove(productOption);
-            return _context.SaveContextChanges()>0;
+            return _context.SaveContextChanges() > 0;
         }
 
         public void Add(Product product)
@@ -143,13 +140,10 @@ namespace RefactorThis.Core.Infra.Data.Repository
             return _context.SaveContextChanges();
         }
 
-       
         public void Dispose()
         {
             _context.Dispose();
             GC.SuppressFinalize(this);
         }
-
-      
     }
 }

@@ -2,10 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using RefactorThis.Core.Domain.Core.Events;
 using RefactorThis.Core.Infra.Data.Mappings;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace RefactorThis.Core.Infra.Data.Context
 {
@@ -32,5 +29,4 @@ namespace RefactorThis.Core.Infra.Data.Context
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
         }
     }
-
 }

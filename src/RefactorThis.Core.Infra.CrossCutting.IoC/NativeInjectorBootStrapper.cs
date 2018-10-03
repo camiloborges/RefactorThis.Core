@@ -1,4 +1,8 @@
-﻿using RefactorThis.Core.Application.Interfaces;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using RefactorThis.Core.Application.Interfaces;
 using RefactorThis.Core.Application.Services;
 using RefactorThis.Core.Domain.CommandHandlers;
 using RefactorThis.Core.Domain.Commands;
@@ -10,18 +14,14 @@ using RefactorThis.Core.Domain.Events;
 using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Infra.CrossCutting.Bus;
 using RefactorThis.Core.Infra.CrossCutting.Identity.Authorization;
+using RefactorThis.Core.Infra.CrossCutting.Identity.Models;
+using RefactorThis.Core.Infra.Data;
 using RefactorThis.Core.Infra.Data.Context;
+using RefactorThis.Core.Infra.Data.EventSourcing;
 using RefactorThis.Core.Infra.Data.Repository;
 using RefactorThis.Core.Infra.Data.Repository.EventSourcing;
-using RefactorThis.Core.Infra.Data.EventSourcing;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using RefactorThis.Core.Models;
-using Refactorthis.Core.Domain.CommandHandlers;
-using RefactorThis.Core.Infra.Data;
-using RefactorThis.Core.Infra.CrossCutting.Identity.Models;
+
 //using RefactorThis.Core.Infra.CrossCutting.Identity.Services;
 
 namespace RefactorThis.Core.Infra.CrossCutting.IoC
@@ -51,8 +51,8 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
 
             // Domain - Commands
             services.AddScoped<IRequestHandler<CreateProductCommand, MediatR.Unit>, ProductCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateProductCommand, MediatR.Unit >, ProductCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveProductCommand, MediatR.Unit >, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateProductCommand, MediatR.Unit>, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveProductCommand, MediatR.Unit>, ProductCommandHandler>();
             services.AddScoped<IRequestHandler<CreateProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();
             services.AddScoped<IRequestHandler<UpdateProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();

@@ -1,5 +1,4 @@
 ﻿using RefactorThis.Core.Domain;
-using RefactorThis.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

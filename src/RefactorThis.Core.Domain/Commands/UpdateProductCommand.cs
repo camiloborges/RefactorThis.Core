@@ -1,23 +1,19 @@
-﻿using RefactorThis.Core.Domain.Core.Commands;
-using RefactorThis.Core.Domain.Validations;
+﻿using RefactorThis.Core.Domain.Validations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RefactorThis.Core.Domain.Commands
 {
     public class UpdateProductCommand : ProductCommand
     {
-  
-        public UpdateProductCommand(string name, string description, decimal price, decimal deliveryPrice, IList<ProductOptionDTO> options)
+        public UpdateProductCommand(Guid id, string name, string description, decimal price, decimal deliveryPrice, IList<ProductOptionDTO> options)
         {
+            Id = id;
             Name = name;
             Description = description;
             Price = price;
             DeliveryPrice = deliveryPrice;
             Options = options;
-
         }
 
         public override bool IsValid()

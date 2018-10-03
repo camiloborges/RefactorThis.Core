@@ -1,9 +1,9 @@
-﻿using System;
-using RefactorThis.Core.Domain.Core.Events;
+﻿using RefactorThis.Core.Domain.Core.Events;
+using System;
 
 namespace RefactorThis.Core.Domain.Events
 {
-    public class ProductCreatedEvent : Event
+    public class ProductCreatedEvent : DomainEvent
     {
         public ProductCreatedEvent(Guid id, string name, string description, decimal price, decimal deliveryPrice)
         {
@@ -11,8 +11,10 @@ namespace RefactorThis.Core.Domain.Events
             Name = name;
             Description = description;
             Price = price;
+            DeliveryPrice = deliveryPrice;
             AggregateId = id;
         }
+
         public Guid Id { get; set; }
 
         public string Name { get; private set; }
@@ -21,6 +23,5 @@ namespace RefactorThis.Core.Domain.Events
 
         public decimal Price { get; private set; }
         public decimal DeliveryPrice { get; private set; }
-
     }
 }

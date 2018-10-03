@@ -1,6 +1,6 @@
-﻿using System;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using RefactorThis.Core.Domain.Core.Events;
+using System;
 
 namespace RefactorThis.Core.Domain.Core.Commands
 {

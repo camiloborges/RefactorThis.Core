@@ -1,14 +1,13 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
+using System;
 
 namespace RefactorThis.Core.Domain.Core.Events
-{ 
-
-    public abstract class Event : Message, INotification
+{
+    public abstract class DomainEvent : Message, INotification
     {
         public DateTime Timestamp { get; private set; }
 
-        protected Event()
+        protected DomainEvent()
         {
             Timestamp = DateTime.Now;
         }

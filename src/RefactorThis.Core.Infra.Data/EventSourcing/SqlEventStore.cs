@@ -16,7 +16,7 @@ namespace RefactorThis.Core.Infra.Data.EventSourcing
             _user = user;
         }
 
-        public void Save<T>(T theEvent) where T : Event
+        public void Save<T>(T theEvent) where T : DomainEvent
         {
             var serializedData = JsonConvert.SerializeObject(theEvent);
 

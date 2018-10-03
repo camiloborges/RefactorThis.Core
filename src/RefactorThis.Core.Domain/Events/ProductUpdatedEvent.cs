@@ -3,7 +3,7 @@ using System;
 
 namespace RefactorThis.Core.Domain.Events
 {
-    public class ProductUpdatedEvent : Event
+    public class ProductUpdatedEvent : DomainEvent
     {
         public ProductUpdatedEvent(Guid id, string name, string description, decimal price, decimal deliveryPrice)
         {
@@ -11,8 +11,10 @@ namespace RefactorThis.Core.Domain.Events
             Name = name;
             Description = description;
             Price = price;
+            DeliveryPrice = deliveryPrice;
             AggregateId = id;
         }
+
         public Guid Id { get; set; }
 
         public string Name { get; private set; }
