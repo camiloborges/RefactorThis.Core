@@ -12,6 +12,6 @@ namespace RefactorThis.Core.Domain.Commands
         public decimal Price { get; protected set; }
         public decimal DeliveryPrice { get; protected set; }
         public IList<ProductOptionDTO> Options { get; protected set; }
-
+        public ProductCommand() : base() { }
     }
 }

@@ -1,8 +1,8 @@
 using KellermanSoftware.CompareNetObjects;
 using Microsoft.Extensions.Logging;
 using Moq;
+using RefactorThis.Core.Infra.Data.Repository;
 using RefactorThis.Core.Models;
-using RefactorThis.Core.Repository;
 using RefactorThis.Core.UnitTests.Mocks;
 using System;
 using System.Collections.Generic;
@@ -80,7 +80,7 @@ namespace RefactorThis.Core.UnitTests
                 context.FeedDataContext(ProductMocks.ProductsBaseDataset);
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
-                var product = repository.GetProduct(ProductMocks.ProductSamsungGalaxyS7.Id);
+                var product = repository.GetById(ProductMocks.ProductSamsungGalaxyS7.Id);
                 var compareLogic = new CompareLogic();
 
                 var result = compareLogic.Compare(product, ProductMocks.ProductSamsungGalaxyS7);
@@ -99,9 +99,9 @@ namespace RefactorThis.Core.UnitTests
                 {
                     var logger = new Mock<ILogger<ProductsRepository>>();
                     var repository = new ProductsRepository(context, logger.Object);
-                    repository.AddProduct(ProductMocks.NewProductiPhoneXS);
+                    repository.Add(ProductMocks.NewProductiPhoneXS);
 
-                    var product = repository.GetProduct(ProductMocks.NewProductiPhoneXS.Id);
+                    var product = repository.GetById(ProductMocks.NewProductiPhoneXS.Id);
                     product.ShouldBeSameAs(ProductMocks.NewProductiPhoneXS);
                 }
             }
@@ -120,7 +120,7 @@ namespace RefactorThis.Core.UnitTests
                 context.FeedDataContext(ProductMocks.ProductsBaseDataset);
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
-                Assert.Throws<InvalidOperationException>(() => repository.AddProduct(ProductMocks.ProductSamsungGalaxyS7));
+                Assert.Throws<InvalidOperationException>(() => repository.Add(ProductMocks.ProductSamsungGalaxyS7));
             }
         }
 
@@ -132,7 +132,7 @@ namespace RefactorThis.Core.UnitTests
             {
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
-                Assert.Throws<KeyNotFoundException>(() => repository.UpdateProduct(ProductMocks.ProductSamsungGalaxyS7));
+                Assert.Throws<KeyNotFoundException>(() => repository.Update(ProductMocks.ProductSamsungGalaxyS7));
             }
         }
 
@@ -148,8 +148,8 @@ namespace RefactorThis.Core.UnitTests
                 var product = ProductMocks.ProductSamsungGalaxyS7;
                 product.Description = "TestDescription";
                 product.Name = "TestName";
-                repository.UpdateProduct(product);
-                var updatedProduct = repository.GetProduct(product.Id);
+                repository.Update(product);
+                var updatedProduct = repository.GetById(product.Id);
                 updatedProduct.Name.ShouldBeSameAs(product.Name);
                 updatedProduct.Description.ShouldBeSameAs(product.Description);
             }
@@ -164,7 +164,7 @@ namespace RefactorThis.Core.UnitTests
                 context.FeedDataContext(ProductMocks.ProductsBaseDataset);
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
-                repository.DeleteProduct(ProductMocks.ProductSamsungGalaxyS7).ShouldBeTrue();
+                repository.Remove(ProductMocks.ProductSamsungGalaxyS7.Id);
             }
         }
 
@@ -176,7 +176,7 @@ namespace RefactorThis.Core.UnitTests
             {
                 var logger = new Mock<ILogger<ProductsRepository>>();
                 var repository = new ProductsRepository(context, logger.Object);
-                Assert.Throws<KeyNotFoundException>(() => repository.DeleteProduct(ProductMocks.NewProductiPhoneXS));
+                Assert.Throws<KeyNotFoundException>(() => repository.Remove(ProductMocks.NewProductiPhoneXS.Id));
             }
         }
 

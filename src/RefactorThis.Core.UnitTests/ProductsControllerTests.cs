@@ -19,7 +19,7 @@ namespace RefactorThis.Core.UnitTests
         {
             var logger = new Mock<ILogger<ProductsController>>();
             var repo = new Mock<IProductsRepository>();
-            repo.Setup(r => r.GetAllProducts()).Returns(ProductMocks.ProductsBaseDataset);
+            repo.Setup(r => r.GetAll()).Returns(ProductMocks.ProductsBaseDataset.AsQueryable());
 
             var controller = new ProductsController(logger.Object, repo.Object);
             var result = controller.Get(null);

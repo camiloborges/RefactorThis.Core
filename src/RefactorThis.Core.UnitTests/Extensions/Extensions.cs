@@ -1,4 +1,5 @@
-﻿using RefactorThis.Core.Models;
+﻿using RefactorThis.Core.Domain;
+using RefactorThis.Core.Models;
 using System.Collections.Generic;
 
 public static class RefactorThisExtensions

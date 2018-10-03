@@ -13,6 +13,7 @@ using RefactorThis.Core.Infra.Data.Context;
 using RefactorThis.Core.Infra.Data.Repository;
 using RefactorThis.Core.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
 
 namespace RefactorThis.Core
 {
@@ -30,24 +31,18 @@ namespace RefactorThis.Core
         {
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-/*            services.AddWebApi(options =>
-            {
-                options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
-                options.UseCentralRoutePrefix(new RouteAttribute("api/v{version}"));
-            });*/
-
+            
             services.AddAutoMapperSetup();
-            //  services.AddScoped<ILogger, Logger>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" });
             });
 
-            //   var connection = @"data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\Users\\KoganTV\\source\\repos\\RefactorThis.Core\\RefactorThis.Core\\App_Data\\Database.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework"  ;
             services.AddDbContext<ProductsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Adding MediatR for Domain Events and Notifications
-            services.AddMediatR(typeof(Startup));
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddMediatorHandlers(typeof(Startup).GetTypeInfo().Assembly);
+
             RegisterServices(services);
         }
 

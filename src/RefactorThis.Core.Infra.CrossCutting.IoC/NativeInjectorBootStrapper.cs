@@ -50,9 +50,12 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
             services.AddScoped<INotificationHandler<ProductRemovedEvent>, ProductEventHandler>();
 
             // Domain - Commands
-            services.AddScoped<IRequestHandler<CreateProductCommand>, ProductCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateProductCommand>, ProductCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveProductCommand>, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateProductCommand, MediatR.Unit>, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateProductCommand, MediatR.Unit >, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveProductCommand, MediatR.Unit >, ProductCommandHandler>();
+            services.AddScoped<IRequestHandler<CreateProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveProductOptionCommand, MediatR.Unit>, ProductOptionCommandHandler>();
 
             // Infra - Data
             services.AddScoped<IProductsRepository, ProductsRepository>();
@@ -65,8 +68,8 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
             services.AddScoped<EventStoreSQLContext>();
 
             // Infra - Identity Services
-        //    services.AddTransient<IEmailSender, AuthEmailMessageSender>();
-          //  services.AddTransient<ISmsSender, AuthSMSMessageSender>();
+            //    services.AddTransient<IEmailSender, AuthEmailMessageSender>();
+            //  services.AddTransient<ISmsSender, AuthSMSMessageSender>();
 
             // Infra - Identity
             services.AddScoped<IUser, AspNetUser>();

@@ -1,4 +1,5 @@
 ﻿using RefactorThis.Core.Domain.Core.Commands;
+using RefactorThis.Core.Domain.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace RefactorThis.Core.Domain.Commands
 
         public override bool IsValid()
         {
-            throw new NotImplementedException();
+            ValidationResult = new UpdateProductCommandValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }
