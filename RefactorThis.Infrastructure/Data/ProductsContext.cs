@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
+using System.IO;
 
 namespace RefactorThis.Infrastructure.Data
 {
@@ -39,8 +40,11 @@ namespace RefactorThis.Infrastructure.Data
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 //
+                var path = Directory.GetCurrentDirectory();
+                var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+                var rootPath = baseDir.Substring(0, baseDir.IndexOf("\\bin"));
                 IConfigurationRoot configuration = new ConfigurationBuilder()
-                      .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                      .SetBasePath(rootPath)
                       .AddJsonFile("appsettings.json")
                       .Build();
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));

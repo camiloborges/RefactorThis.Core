@@ -6,14 +6,10 @@
 
   <ItemGroup>
     <Compile Remove="Context\EventStoreSQLContext.cs" />
-    <Compile Remove="Data\AppDbContext.cs" />
-    <Compile Remove="Data\ProductsRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Context\EventStoreSQLContext.cs" />
-    <Content Include="Data\AppDbContext.cs" />
-    <Content Include="Data\ProductsRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

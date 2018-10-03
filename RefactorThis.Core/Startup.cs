@@ -26,9 +26,9 @@ namespace RefactorThis.Core
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<IRepository, EfRepository>();
             services.AddScoped<IProductsContext, ProductsContext>();
-            //  services.AddScoped<ILogger, Logger>();
+            services.AddScoped<IRepository, EfRepository>();
+//services.AddScoped<ILogger, Logger>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" });
@@ -36,6 +36,10 @@ namespace RefactorThis.Core
 
             //   var connection = @"data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\Users\\KoganTV\\source\\repos\\RefactorThis.Core\\RefactorThis.Core\\App_Data\\Database.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework"  ;
             services.AddDbContext<ProductsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +67,8 @@ namespace RefactorThis.Core
             });
 
             app.UseMvc();
+
+
         }
     }
 }
