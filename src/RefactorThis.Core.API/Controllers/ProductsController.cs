@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
 using RefactorThis.Core.Application.Interfaces;
+using RefactorThis.Core.Application.ViewModels;
 using RefactorThis.Core.Controllers;
 using RefactorThis.Core.Domain;
 using RefactorThis.Core.Domain.Core;
@@ -21,36 +22,28 @@ namespace RefactorThis.Controllers
     public class ProductsController : ApiController
     {
         private readonly ILogger _logger;
-        private readonly IProductsRepository _repository;
-        /**/
+     //   private readonly IProductsRepository _repository;
+        private readonly IProductAppService _service;
 
         public ProductsController(
-             IProductAppService customerAppService,
+             IProductAppService productAppService,
             INotificationHandler<DomainNotification> notifications,
             IMediatorHandler mediator) : base(notifications, mediator)
         {
-           /* _logger = logger;
-            _repository = repository;*/
+            _service = productAppService;
         }
-/*
-        public ProductsController(
-            ILogger<ProductsController> logger, IProductsRepository repository)
-        {
-            _logger = logger;
-            _repository = repository;
-        }
-        */
+       
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get([FromQuery]string name)
+        public ActionResult<IEnumerable<ProductViewModel>> Get([FromQuery]string name)
         {
             try
             {
                 _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", name);
-                IEnumerable<Product> products;
+                IEnumerable<ProductViewModel> products;
                 if (String.IsNullOrEmpty(name))
-                    products = _repository.GetAllProducts();
+                    products = _service.GetAll();
                 else
-                    products = _repository.SearchByName(name);
+                    products = _service.SearchByName(name);
                 return new OkObjectResult(products.ToList());
             }
             catch (Exception exception)
@@ -68,21 +61,13 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetProduct(id);
+                var product = _service.GetById(id);
                 if (product is null)
                 {
                     return new NotFoundResult();
                 }
 
-                return new OkObjectResult(new Product()
-                {
-                    DeliveryPrice = product.DeliveryPrice,
-                    Name = product.Name,
-                    Id = product.Id,
-                    Description = product.Description,
-                    Price = product.Price,
-                    ProductOptions = product.ProductOptions.ToList(),
-                });
+                return new OkObjectResult(product);
             }
             catch (Exception exception)
             {
@@ -92,12 +77,12 @@ namespace RefactorThis.Controllers
         }
 
         [HttpPost]
-        public void Post(Product product)
+        public void Post(ProductViewModel product)
         {
             try
             {
-                Product item = SanitizeInput(product.Id, product);
-                _repository.AddProduct(item);
+              //  Product item = SanitizeInput(product.Id, product);
+                _service.Create(product);
             }
             catch (Exception exception)
             {
@@ -108,12 +93,12 @@ namespace RefactorThis.Controllers
 
         [Route("{id}")]
         [HttpPut]
-        public void Update(Guid id, Product product)
+        public void Update(Guid id, ProductViewModel product)
         {
             try
             {
-                Product orig = SanitizeInput(id, product);
-                _repository.UpdateProduct(orig);
+               // Product orig = SanitizeInput(id, product);
+                _service.Update(product);
             }
             catch (Exception exception)
             {
@@ -148,8 +133,12 @@ namespace RefactorThis.Controllers
         {
             try
             {
-                var product = _repository.GetProduct(id);
-                _repository.DeleteProduct(product);
+                var product = _service.GetById(id);
+                if (product is null)
+                    throw new KeyNotFoundException();
+
+                _service.Remove(id);
+                
             }
             catch (Exception exception)
             {
@@ -164,7 +153,7 @@ namespace RefactorThis.Controllers
         {
             try
             {
-                return new OkObjectResult(_repository.GetProductOptions(productId));
+                return new OkObjectResult(_service.GetProductOptions(productId));
             }
             catch (Exception exception)
             {
@@ -179,7 +168,7 @@ namespace RefactorThis.Controllers
         {
             try
             {
-                var item = _repository.GetProductOption(productId, id);
+                var item = _service.GetProductOption(productId, id);
                 return new OkObjectResult(item);
             }
             catch (Exception exception)
@@ -191,12 +180,12 @@ namespace RefactorThis.Controllers
 
         [Route("{productId}/options")]
         [HttpPost]
-        public void AddProductOption(Guid productId, ProductOption option)
+        public void AddProductOption(Guid productId, ProductOptionViewModel option)
         {
             try
             {
                 option.ProductId = productId;
-                _repository.AddProductOption(option);
+                _service.CreateProductOption(option);
             }
             catch (Exception exception)
             {
@@ -207,18 +196,11 @@ namespace RefactorThis.Controllers
 
         [Route("{productId}/options/{id}")]
         [HttpPut]
-        public void UpdateOption(Guid productId, Guid id, ProductOption option)
+        public void UpdateOption(Guid productId, Guid id, ProductOptionViewModel option)
         {
             try
             {
-                var orig = new ProductOption
-                {
-                    Id = id,
-                    Name = option.Name,
-                    Description = option.Description,
-                    ProductId = productId
-                };
-                _repository.UpdateProductOption(orig);
+                _service.UpdateProductOption(option);
             }
             catch (Exception exception)
             {
@@ -229,11 +211,11 @@ namespace RefactorThis.Controllers
 
         [Route("{productId}/options/{id}")]
         [HttpDelete]
-        public void DeleteOption(Guid productId, Guid id)
+        public void RemoveOption(Guid productId, Guid id)
         {
             try
             {
-                _repository.DeleteProductOption(productId, id);
+                _service.RemoveProductOption(productId, id);
             }
             catch (Exception exception)
             {

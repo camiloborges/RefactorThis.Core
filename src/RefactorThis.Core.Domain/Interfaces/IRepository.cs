@@ -7,6 +7,7 @@ namespace RefactorThis.Core.Domain.Interfaces
     {
         void Add(TEntity item);
         TEntity GetById(Guid id);
+
         IQueryable<TEntity> GetAll();
         void Update(TEntity item);
         void Remove(Guid id);

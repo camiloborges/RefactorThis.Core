@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using RefactorThis.Core.API.Application.Commands;
 using RefactorThis.Core.Application.Extensions;
 using RefactorThis.Core.Application.ViewModels;
+using RefactorThis.Core.Domain.Commands;
 using System.Linq;
 
 namespace Refactortis.Core.Application.AutoMapper
@@ -11,9 +11,9 @@ namespace Refactortis.Core.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<ProductViewModel, CreateProductCommand>()
-                .ConstructUsing(c => new CreateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO()));
+                .ConstructUsing(c => new CreateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO().ToList()));
             CreateMap<ProductViewModel, UpdateProductCommand>()
-                .ConstructUsing(c => new UpdateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice));
+                .ConstructUsing(c => new UpdateProductCommand(c.Name, c.Description, c.Price, c.DeliveryPrice, c.ProductOptions.ToProductOptionsDTO().ToList()));
         }
     }
 }

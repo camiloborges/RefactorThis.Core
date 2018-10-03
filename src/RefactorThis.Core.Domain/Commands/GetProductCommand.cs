@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RefactorThis.Core.API.Application.Commands
+namespace RefactorThis.Core.Domain.Commands
 {
-    public class GetProductCommand : Command
+    public class GetProductCommand : ProductCommand
     {
         public override bool IsValid()
         {

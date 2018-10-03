@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RefactorThis.Core.Api.Configurations;
 using RefactorThis.Core.Domain.Interfaces;
+using RefactorThis.Core.Infra.CrossCutting.IoC;
 using RefactorThis.Core.Infra.Data.Context;
 using RefactorThis.Core.Infra.Data.Repository;
 using RefactorThis.Core.Models;
@@ -24,10 +28,17 @@ namespace RefactorThis.Core
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<IProductsRepository, ProductsRepository>();
-            services.AddScoped<IProductsContext, ProductsContext>();
+/*            services.AddWebApi(options =>
+            {
+                options.OutputFormatters.Remove(new XmlDataContractSerializerOutputFormatter());
+                options.UseCentralRoutePrefix(new RouteAttribute("api/v{version}"));
+            });*/
+
+
+            services.AddAutoMapperSetup();
             //  services.AddScoped<ILogger, Logger>();
             services.AddSwaggerGen(c =>
             {
@@ -36,6 +47,9 @@ namespace RefactorThis.Core
 
             //   var connection = @"data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\Users\\KoganTV\\source\\repos\\RefactorThis.Core\\RefactorThis.Core\\App_Data\\Database.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework"  ;
             services.AddDbContext<ProductsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Adding MediatR for Domain Events and Notifications
+            services.AddMediatR(typeof(Startup));
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +77,11 @@ namespace RefactorThis.Core
             });
 
             app.UseMvc();
+        }
+        private static void RegisterServices(IServiceCollection services)
+        {
+            // Adding dependencies from another layers (isolated from Presentation)
+            NativeInjectorBootStrapper.RegisterServices(services);
         }
     }
 }

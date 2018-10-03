@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>RefactorThis.Core.Infra.CrossCutting.IoC</AssemblyName>
+    <PackageId>Equinox.Infra.CrossCutting.IoC</PackageId>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RefactorThis.Core.Application\RefactorThis.Core.Application.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.CrossCutting.Bus\RefactorThis.Core.Infra.CrossCutting.Bus.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.CrossCutting.Identity\RefactorThis.Core.Infra.CrossCutting.Identity.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>

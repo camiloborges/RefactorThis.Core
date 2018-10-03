@@ -2,7 +2,7 @@
 using RefactorThis.Core.Application.AutoMapper;
 using Refactortis.Core.Application.AutoMapper;
 
-namespace Equinox.Application.AutoMapper
+namespace RefactorThis.Core.Application.AutoMapper
 {
     public class AutoMapperConfig
     {

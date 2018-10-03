@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Equinox.Domain.Models;
+using RefactorThis.Core.Domain.Models;
 
 namespace RefactorThis.Core.Infra.Data.Mappings
 {    

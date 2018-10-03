@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RefactorThis.Core.API.Application.Commands
+namespace RefactorThis.Core.Domain.Commands
 {
-    public class RemoveProductCommand : Command
+    public class RemoveProductCommand : ProductCommand
     {
-        private Guid id;
 
         public RemoveProductCommand(Guid id)
         {
-            this.id = id;
+            Id = id;
         }
 
         public override bool IsValid()

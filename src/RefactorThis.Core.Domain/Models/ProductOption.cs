@@ -24,6 +24,14 @@ namespace RefactorThis.Core.Domain
         [MaxLength(500)]
         [DisplayName("Description")]
         public string Description { get; set; }
-       
+
+        public ProductOption() { }
+
+        public ProductOption(Guid id, Guid productId, string name, string description) {
+            Id = id;
+            ProductId = productId;
+            Name = name;
+            Description = description;
+        }
     }
 }

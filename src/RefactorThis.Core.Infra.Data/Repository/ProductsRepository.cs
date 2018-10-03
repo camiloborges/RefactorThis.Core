@@ -13,7 +13,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
 {
     public sealed class ProductsRepository : IProductsRepository
     {
-        public IEnumerable<Product> Items { get; private set; }
+        public IQueryable<Product> Items { get; private set; }
         private ILogger<ProductsRepository> _logger;
         private IProductsContext _context;
 
@@ -25,13 +25,13 @@ namespace RefactorThis.Core.Infra.Data.Repository
             _logger = logger;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public IQueryable<Product> GetAllProducts()
         {
             var products = _context.Product;
             return products;
         }
 
-        public IEnumerable<ProductOption> GetProductOptions(Guid productId)
+        public IQueryable<ProductOption> GetProductOptions(Guid productId)
         {
             var products = _context.ProductOption.Where(p => p.ProductId == productId);
             return products;
@@ -105,7 +105,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             return _context.SaveContextChanges();
         }
 
-        public IEnumerable<Product> SearchByName(string name)
+        public IQueryable<Product> SearchByName(string name)
         {
             var items = _context.Product.Where(p => p.Name.Contains(name, StringComparison.InvariantCulture));
             return items;
@@ -180,5 +180,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             _context.Dispose();
             GC.SuppressFinalize(this);
         }
+
+      
     }
 }

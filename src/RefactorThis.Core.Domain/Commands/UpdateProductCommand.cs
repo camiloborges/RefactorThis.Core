@@ -4,21 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RefactorThis.Core.API.Application.Commands
+namespace RefactorThis.Core.Domain.Commands
 {
-    public class UpdateProductCommand : Command
+    public class UpdateProductCommand : ProductCommand
     {
-        private string name;
-        private string description;
-        private decimal price;
-        private decimal deliveryPrice;
-
-        public UpdateProductCommand(string name, string description, decimal price, decimal deliveryPrice)
+  
+        public UpdateProductCommand(string name, string description, decimal price, decimal deliveryPrice, IList<ProductOptionDTO> options)
         {
-            this.name = name;
-            this.description = description;
-            this.price = price;
-            this.deliveryPrice = deliveryPrice;
+            Name = name;
+            Description = description;
+            Price = price;
+            DeliveryPrice = deliveryPrice;
+            Options = options;
+
         }
 
         public override bool IsValid()

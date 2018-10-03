@@ -32,7 +32,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RefactorThis.Core\RefactorThis.Core.API.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.API\RefactorThis.Core.API.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

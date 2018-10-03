@@ -1,8 +1,6 @@
-﻿using RefactorThis.Core.API.Application.Commands;
-using RefactorThis.Core.Domain.Core.Commands;
+﻿using RefactorThis.Core.Domain.Core.Commands;
 using System;
 using System.Collections.Generic;
-using static RefactorThis.Core.API.Application.Commands.CreateProductCommand;
 
 namespace RefactorThis.Core.Domain.Commands
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Equinox.Domain.Core.Models
+namespace RefactorThis.Core.Domain.Core.Models
 {
     public abstract class Entity
     {

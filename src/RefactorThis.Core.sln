@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.API", "RefactorThis.Core\RefactorThis.Core.API.csproj", "{3E2D65DF-E343-45F1-B3DC-3BB233766000}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.UnitTests", "RefactorThis.Core.UnitTests\RefactorThis.Core.UnitTests.csproj", "{DF3364E8-DE81-428F-9D3D-E745342EF390}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8776AD6D-258A-4D53-99C9-71AB7E45A3F4}"
@@ -15,13 +13,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RefactoringSteps.md = RefactoringSteps.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain", "RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj", "{977A7F9C-5A9A-4E3D-896D-942F697E08D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Domain", "RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj", "{977A7F9C-5A9A-4E3D-896D-942F697E08D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain.Core", "RefactorThis.Core.Domain.Core\RefactorThis.Core.Domain.Core.csproj", "{BBEB0BF9-407E-434A-AD13-A00B036E345B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Domain.Core", "RefactorThis.Core.Domain.Core\RefactorThis.Core.Domain.Core.csproj", "{BBEB0BF9-407E-434A-AD13-A00B036E345B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Infra.Data", "RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj", "{5C90545F-0784-4140-BEE8-5857D89844B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Infra.Data", "RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj", "{5C90545F-0784-4140-BEE8-5857D89844B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Application", "RefactorThis.Core.Application\RefactorThis.Core.Application.csproj", "{2A3ECA92-4B96-46B6-AB87-42C049CD648A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Application", "RefactorThis.Core.Application\RefactorThis.Core.Application.csproj", "{2A3ECA92-4B96-46B6-AB87-42C049CD648A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.API", "RefactorThis.Core.API\RefactorThis.Core.API.csproj", "{FDD5875D-6798-471E-8C04-15325D56B6F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Infra.CrossCutting.IoC", "RefactorThis.Core.Infra.CrossCutting.IoC\RefactorThis.Core.Infra.CrossCutting.IoC.csproj", "{BF0BAE13-8E92-421D-8AFE-4851E869E2C2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Infra.CrossCutting.Bus", "RefactorThis.Core.Infra.CrossCutting.Bus\RefactorThis.Core.Infra.CrossCutting.Bus.csproj", "{023B77D6-9F63-45DE-8B57-5EE3BECC9EC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Infra.CrossCutting.Identity", "RefactorThis.Core.Infra.CrossCutting.Identity\RefactorThis.Core.Infra.CrossCutting.Identity.csproj", "{C484F6E3-6ED5-40BB-AB9B-01867EA0F7B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +35,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3E2D65DF-E343-45F1-B3DC-3BB233766000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E2D65DF-E343-45F1-B3DC-3BB233766000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E2D65DF-E343-45F1-B3DC-3BB233766000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E2D65DF-E343-45F1-B3DC-3BB233766000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF3364E8-DE81-428F-9D3D-E745342EF390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF3364E8-DE81-428F-9D3D-E745342EF390}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3364E8-DE81-428F-9D3D-E745342EF390}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +55,22 @@ Global
 		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A3ECA92-4B96-46B6-AB87-42C049CD648A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDD5875D-6798-471E-8C04-15325D56B6F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDD5875D-6798-471E-8C04-15325D56B6F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDD5875D-6798-471E-8C04-15325D56B6F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDD5875D-6798-471E-8C04-15325D56B6F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF0BAE13-8E92-421D-8AFE-4851E869E2C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0BAE13-8E92-421D-8AFE-4851E869E2C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0BAE13-8E92-421D-8AFE-4851E869E2C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0BAE13-8E92-421D-8AFE-4851E869E2C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023B77D6-9F63-45DE-8B57-5EE3BECC9EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023B77D6-9F63-45DE-8B57-5EE3BECC9EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023B77D6-9F63-45DE-8B57-5EE3BECC9EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023B77D6-9F63-45DE-8B57-5EE3BECC9EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C484F6E3-6ED5-40BB-AB9B-01867EA0F7B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C484F6E3-6ED5-40BB-AB9B-01867EA0F7B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C484F6E3-6ED5-40BB-AB9B-01867EA0F7B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C484F6E3-6ED5-40BB-AB9B-01867EA0F7B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

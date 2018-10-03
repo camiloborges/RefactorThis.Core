@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Equinox.Application.EventSourcedNormalizers;
-using RefactorThis.Core.API.Application.Commands;
 using RefactorThis.Core.Application.Interfaces;
 using RefactorThis.Core.Application.ViewModels;
+using RefactorThis.Core.Domain.Commands;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Infra.Data.Repository.EventSourcing;
@@ -39,7 +39,19 @@ namespace RefactorThis.Core.Application.Services
         {
             return _mapper.Map<ProductViewModel>(_productRepository.GetById(id));
         }
+        public IEnumerable<ProductViewModel> SearchByName(string name)
+        {
+            return _productRepository.SearchByName(name).ProjectTo<ProductViewModel>();
+        }
 
+        public IEnumerable<ProductOptionViewModel> GetProductOptions(Guid productId)
+        {
+            return _productRepository.GetProductOptions(productId).ProjectTo<ProductOptionViewModel>();
+        }
+        public ProductOptionViewModel GetProductOption(Guid productId, Guid productOptionId)
+        {
+            return _mapper.Map<ProductOptionViewModel>(_productRepository.GetProductOption(productId,productOptionId));
+        }
         public void Create(ProductViewModel customerViewModel)
         {
             var registerCommand = _mapper.Map<CreateProductCommand>(customerViewModel);
@@ -66,6 +78,21 @@ namespace RefactorThis.Core.Application.Services
         public void Dispose()
         {
             GC.SuppressFinalize(this);
+        }
+
+        public void CreateProductOption(ProductOptionViewModel productOptionViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateProductOption(ProductOptionViewModel productViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveProductOption(Guid id, Guid productOptionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

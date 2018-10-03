@@ -26,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.6.2">
       <PrivateAssets>all</PrivateAssets>
@@ -43,6 +45,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RefactorThis.Core.Application\RefactorThis.Core.Application.csproj" />
     <ProjectReference Include="..\RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Infra.CrossCutting.IoC\RefactorThis.Core.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\RefactorThis.Core.Infra.Data\RefactorThis.Core.Infra.Data.csproj" />
   </ItemGroup>
 

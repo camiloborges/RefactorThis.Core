@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Equinox.Application.ViewModels
+namespace RefactorThis.Core.Application.ViewModels
 {
     public class CustomerViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using RefactorThis.Core.Domain.Core.Commands;
 using System;
 
-namespace RefactorThis.Core.API.Application.Commands
+namespace RefactorThis.Core.Domain.Commands
 {
 
     public class ProductOptionDTO : Command
