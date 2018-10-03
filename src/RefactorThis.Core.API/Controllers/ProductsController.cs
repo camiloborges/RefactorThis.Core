@@ -17,10 +17,10 @@ namespace RefactorThis.Controllers
     public class ProductsController : Controller
     {
         private readonly ILogger _logger;
-        private readonly IRepository _repository;
+        private readonly IProductsRepository _repository;
       
         public ProductsController(
-            ILogger<ProductsController> logger, IRepository repository)
+            ILogger<ProductsController> logger, IProductsRepository repository)
         {
             _logger = logger;
             _repository = repository;
@@ -53,7 +53,8 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(id);
+                var product = _repository.GetProduct(id);
+                var options = product.GetProductOptions();
 
                 return new OkObjectResult(new Product()
                 {
@@ -62,7 +63,7 @@ namespace RefactorThis.Controllers
                     Id = product.Id,
                     Description = product.Description,
                     Price = product.Price,
-                    ProductOptions = product.ProductOptions.ToList(),
+                    ProductOptions = options.ToList(),
                 });
             }
             catch (Exception exception)
@@ -99,7 +100,7 @@ namespace RefactorThis.Controllers
             try
             {
                 Product sanitizedProduct = SanitizeInput(id, input);
-                var product = _repository.GetById<Product>(id);
+                var product = _repository.GetProduct(id);
                 product.Name = sanitizedProduct.Name;
                 product.Description = sanitizedProduct.Description;
 
@@ -141,7 +142,7 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(id);
+                var product = _repository.GetProduct(id);
                 _repository.Delete(product);
             }
             catch (Exception exception)
@@ -159,8 +160,8 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(productId);
-                return new OkObjectResult(product.GetProductOptions());
+                var options = _repository.GetProductOptions(productId);
+                return new OkObjectResult(options);
             }
             catch (Exception exception)
             {
@@ -177,9 +178,8 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(productId);
-                var item = product.GetProductOption(id);
-                return new OkObjectResult(item);
+                var option = _repository.GetProductOption(productId,id);
+                return new OkObjectResult(option);
             }
             catch (Exception exception)
             {
@@ -197,7 +197,7 @@ namespace RefactorThis.Controllers
             try
             {
                 option.ProductId = productId;
-                var product = _repository.GetById<Product>(productId);
+                var product = _repository.GetProduct(productId);
                 product.ProductOptions.Add(option);
                 _repository.Update(product); 
             }
@@ -216,7 +216,7 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(productId);
+                var product = _repository.GetProduct(productId);
 
                 var productOption = product.GetProductOption(id);
 
@@ -240,7 +240,7 @@ namespace RefactorThis.Controllers
 
             try
             {
-                var product = _repository.GetById<Product>(productId);
+                var product = _repository.GetProduct(productId);
                 var productOption = product.GetProductOption(id);
                 product.ProductOptions.Remove(productOption);
                 _repository.Update(product);

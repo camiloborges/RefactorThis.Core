@@ -10,7 +10,7 @@ namespace RefactorThis.Core.Interfaces
 
         //IEnumerable<Product> GetAllProducts();
 
-      //  Product GetProduct(Guid productId);
+        Product GetProduct(Guid productId);
 
     //    Product AddProduct(Product product);
 

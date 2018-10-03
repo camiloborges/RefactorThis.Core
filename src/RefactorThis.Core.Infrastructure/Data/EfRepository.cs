@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace RefactorThis.Core.Infrastructure
 {
-    public class EfRepository : IRepository
+    public abstract class EfRepository : IRepository
     {
         private readonly ProductsContext _dbContext;
 

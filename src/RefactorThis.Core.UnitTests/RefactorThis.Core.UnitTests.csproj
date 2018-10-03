@@ -9,11 +9,6 @@
 
   <ItemGroup>
     <Compile Remove="Mocks\ProductsMocks.cs" />
-    <Compile Remove="ProductsRepositoryTests.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="ProductsRepositoryTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

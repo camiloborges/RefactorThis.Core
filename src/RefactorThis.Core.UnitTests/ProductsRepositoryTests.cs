@@ -1,8 +1,8 @@
 using KellermanSoftware.CompareNetObjects;
 using Microsoft.Extensions.Logging;
 using Moq;
+using RefactorThis.Core.Infrastructure;
 using RefactorThis.Core.Models;
-using RefactorThis.Core.Repository;
 using RefactorThis.Core.UnitTests.Mocks;
 using System;
 using System.Collections.Generic;

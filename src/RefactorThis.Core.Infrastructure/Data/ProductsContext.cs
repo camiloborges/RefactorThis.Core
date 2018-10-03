@@ -11,13 +11,11 @@ namespace RefactorThis.Core.Infrastructure
     public partial class ProductsContext : DbContext, IProductsContext
     {
       
-        private readonly IDomainEventDispatcher _dispatcher;
 
       
-        public ProductsContext(DbContextOptions<ProductsContext> options, IDomainEventDispatcher dispatcher)
+        public ProductsContext(DbContextOptions<ProductsContext> options)
             : base(options)
         {
-            _dispatcher = dispatcher;
         }
 
         public ProductsContext()

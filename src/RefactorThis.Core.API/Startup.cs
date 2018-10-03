@@ -26,14 +26,12 @@ namespace RefactorThis.Core
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddScoped<IProductsContext, ProductsContext>();
-            services.AddScoped<IRepository, EfRepository>();
-//services.AddScoped<ILogger, Logger>();
+            services.AddScoped<IProductsRepository, ProductsRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Products API", Version = "v1" });
             });
 
-            //   var connection = @"data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\Users\\KoganTV\\source\\repos\\RefactorThis.Core\\RefactorThis.Core\\App_Data\\Database.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework"  ;
             services.AddDbContext<ProductsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
