@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RefactorThis.Core.Domain.Core\RefactorThis.Core.Domain.Core.csproj" />
-    <ProjectReference Include="..\RefactorThis.Core.Domain1\RefactorThis.Core.Domain.csproj" />
+    <ProjectReference Include="..\RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

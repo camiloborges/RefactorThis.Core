@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RefactoringSteps.md = RefactoringSteps.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain", "RefactorThis.Core.Domain1\RefactorThis.Core.Domain.csproj", "{977A7F9C-5A9A-4E3D-896D-942F697E08D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain", "RefactorThis.Core.Domain\RefactorThis.Core.Domain.csproj", "{977A7F9C-5A9A-4E3D-896D-942F697E08D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Domain.Core", "RefactorThis.Core.Domain.Core\RefactorThis.Core.Domain.Core.csproj", "{BBEB0BF9-407E-434A-AD13-A00B036E345B}"
 EndProject
