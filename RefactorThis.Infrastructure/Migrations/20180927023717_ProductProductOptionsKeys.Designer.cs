@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using RefactorThis.Core.Infrastructure;
 using RefactorThis.Core.Models;
-using RefactorThis.Infrastructure.Data;
-
 namespace RefactorThis.Core.Migrations
 {
     [DbContext(typeof(ProductsContext))]

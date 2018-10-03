@@ -2,7 +2,7 @@
 using RefactorThis.Core.Models;
 using System;
 
-namespace RefactorThis.Infrastructure
+namespace RefactorThis.Core.Infrastructure
 {
     public interface IProductsContext: IDisposable
     {

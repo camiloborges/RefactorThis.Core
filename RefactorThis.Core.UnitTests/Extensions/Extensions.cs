@@ -1,5 +1,5 @@
-﻿using RefactorThis.Core.Models;
-using RefactorThis.Infrastructure.Data;
+﻿using RefactorThis.Core.Infrastructure;
+using RefactorThis.Core.Models;
 using System.Collections.Generic;
 
 public static class RefactorThisExtensions

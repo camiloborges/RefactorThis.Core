@@ -43,7 +43,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RefactorThis.Core.Core\RefactorThis.Core.Core.csproj" />
-    <ProjectReference Include="..\RefactorThis.Infrastructure\RefactorThis.Infrastructure.csproj" />
+    <ProjectReference Include="..\RefactorThis.Infrastructure\RefactorThis.Core.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

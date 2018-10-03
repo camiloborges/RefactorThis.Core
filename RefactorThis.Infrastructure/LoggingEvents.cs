@@ -1,4 +1,4 @@
-﻿namespace RefactorThis.Infrastructure
+﻿namespace RefactorThis.Core.Infrastructure
 {
     public static class LoggingEvents
     {

@@ -6,7 +6,7 @@ using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
 using System.IO;
 
-namespace RefactorThis.Infrastructure.Data
+namespace RefactorThis.Core.Infrastructure
 {
     public partial class ProductsContext : DbContext, IProductsContext
     {

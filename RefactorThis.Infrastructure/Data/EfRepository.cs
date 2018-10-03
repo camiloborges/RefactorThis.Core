@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RefactorThis.Infrastructure.Data
+namespace RefactorThis.Core.Infrastructure
 {
     public class EfRepository : IRepository
     {

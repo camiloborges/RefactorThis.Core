@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RefactorThis.Core.Infrastructure;
 using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
-using RefactorThis.Infrastructure;
-using RefactorThis.Infrastructure.Data;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace RefactorThis.Core

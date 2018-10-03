@@ -2,9 +2,9 @@
 using Microsoft.Extensions.Logging;
 using RefactorThis.Core;
 using RefactorThis.Core.Core.Extensions;
+using RefactorThis.Core.Infrastructure;
 using RefactorThis.Core.Interfaces;
 using RefactorThis.Core.Models;
-using RefactorThis.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

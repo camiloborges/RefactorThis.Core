@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RefactoringSteps.md = RefactoringSteps.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Core.Core", "RefactorThis.Core.Core\RefactorThis.Core.Core.csproj", "{B10EDC45-4605-4228-860B-84E0EB1A41C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Core", "RefactorThis.Core.Core\RefactorThis.Core.Core.csproj", "{B10EDC45-4605-4228-860B-84E0EB1A41C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactorThis.Infrastructure", "RefactorThis.Infrastructure\RefactorThis.Infrastructure.csproj", "{822F746E-9B2E-4DD9-ADA4-A4CDD1139309}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RefactorThis.Core.Infrastructure", "RefactorThis.Infrastructure\RefactorThis.Core.Infrastructure.csproj", "{822F746E-9B2E-4DD9-ADA4-A4CDD1139309}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
