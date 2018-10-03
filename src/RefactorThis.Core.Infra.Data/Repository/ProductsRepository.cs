@@ -64,7 +64,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             productOption.Description = orig.Description;
 
             _context.ProductOption.Update(productOption);
-            return _context.SaveContextChanges();
+            return _context.SaveContextChanges()>0;
         }
 
         public bool DeleteProductOption(Guid productId, Guid id)
@@ -74,7 +74,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
                 throw new KeyNotFoundException();
 
             _context.ProductOption.Remove(productOption);
-            return _context.SaveContextChanges();
+            return _context.SaveContextChanges()>0;
         }
 
         public void Add(Product product)
@@ -140,7 +140,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return _context.SaveContextChanges();
         }
 
        

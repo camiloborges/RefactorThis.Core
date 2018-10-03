@@ -18,7 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Configurations\RouteConvention.cs" />
     <Compile Remove="Controllers\ValuesController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Configurations\RouteConvention.cs" />
   </ItemGroup>
 
   <ItemGroup>

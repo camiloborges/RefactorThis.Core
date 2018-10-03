@@ -18,11 +18,10 @@ namespace RefactorThis.Core.Models
         {
         }
 
-        public bool SaveContextChanges()
+        public int SaveContextChanges()
         {
             var changes = base.SaveChanges();
-            return changes > 0;
-            // SaveChanges();
+            return changes;
         }
 
         public virtual DbSet<Product> Product { get; set; }

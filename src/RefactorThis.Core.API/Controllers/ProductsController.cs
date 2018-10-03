@@ -26,7 +26,7 @@ namespace RefactorThis.Controllers
         private readonly IProductAppService _service;
 
         public ProductsController(
-             IProductAppService productAppService,
+            IProductAppService productAppService,
             INotificationHandler<DomainNotification> notifications,
             ILogger<ProductsController> logger,
             IMediatorHandler mediator) : base(notifications, mediator)

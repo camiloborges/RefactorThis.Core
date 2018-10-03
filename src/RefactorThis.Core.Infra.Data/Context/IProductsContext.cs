@@ -9,6 +9,6 @@ namespace RefactorThis.Core.Infra.Data.Context
         DbSet<Product> Product { get; set; }
         DbSet<ProductOption> ProductOption { get; set; }
 
-        bool SaveContextChanges();
+        int SaveContextChanges();
     }
 }

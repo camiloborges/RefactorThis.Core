@@ -32,7 +32,7 @@ namespace RefactorThis.Core.Application.Services
 
         public IEnumerable<ProductViewModel> GetAll()
         {
-            return _productRepository.GetAll().ProjectTo<ProductViewModel>();
+            return _productRepository.GetAll().ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
         }
 
         public ProductViewModel GetById(Guid id)
@@ -41,7 +41,7 @@ namespace RefactorThis.Core.Application.Services
         }
         public IEnumerable<ProductViewModel> SearchByName(string name)
         {
-            return _productRepository.SearchByName(name).ProjectTo<ProductViewModel>();
+            return _productRepository.SearchByName(name).ProjectTo<ProductViewModel>(_mapper.ConfigurationProvider);
         }
 
         public IEnumerable<ProductOptionViewModel> GetProductOptions(Guid productId)
