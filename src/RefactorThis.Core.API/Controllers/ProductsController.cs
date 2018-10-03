@@ -28,8 +28,10 @@ namespace RefactorThis.Controllers
         public ProductsController(
              IProductAppService productAppService,
             INotificationHandler<DomainNotification> notifications,
+            ILogger<ProductsController> logger,
             IMediatorHandler mediator) : base(notifications, mediator)
         {
+            _logger = logger;
             _service = productAppService;
         }
        
@@ -38,7 +40,7 @@ namespace RefactorThis.Controllers
         {
             try
             {
-                _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", name);
+                _logger.LogInformation(LoggingEvents.GetAll, "Getting {name}", (name??""));
                 IEnumerable<ProductViewModel> products;
                 if (String.IsNullOrEmpty(name))
                     products = _service.GetAll();

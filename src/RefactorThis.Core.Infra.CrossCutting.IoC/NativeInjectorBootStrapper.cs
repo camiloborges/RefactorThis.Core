@@ -69,7 +69,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
           //  services.AddTransient<ISmsSender, AuthSMSMessageSender>();
 
             // Infra - Identity
-//            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }

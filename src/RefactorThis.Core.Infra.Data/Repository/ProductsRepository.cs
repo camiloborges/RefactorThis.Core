@@ -24,13 +24,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             _context = dataContext;
             _logger = logger;
         }
-
-        public IQueryable<Product> GetAllProducts()
-        {
-            var products = _context.Product;
-            return products;
-        }
-
+        
         public IQueryable<ProductOption> GetProductOptions(Guid productId)
         {
             var products = _context.ProductOption.Where(p => p.ProductId == productId);
@@ -47,64 +41,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             return option;
         }
 
-        public Product GetProduct(Guid productId)
-        {
-            var product = _context.Product.Include(p => p.ProductOptions).FirstOrDefault(p => p.Id == productId);
-            return product;
-        }
-
-        public Product AddProduct(Product product)
-        {
-            try
-            {
-                var newProduct = _context.Product.Add(product);
-                if (newProduct == null)
-                {
-                    throw new NullReferenceException("Product shouldn't be null after it is added");
-                }
-                _context.SaveContextChanges();
-                return newProduct.Entity;
-            }
-            catch (InvalidOperationException operationException)
-            {
-                _logger.LogError(LoggingEvents.AddProduct, operationException, "Possible Primary Key Violation {id}", product.Id);
-                throw ;
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(LoggingEvents.AddProduct, exception, "AddProduct Exception {id}", product.Id);
-                throw ;
-            }
-        }
-
-        public Product UpdateProduct(Product product)
-        {
-            var savedProduct = _context.Product.FirstOrDefault(p => p.Id == product.Id);
-            if (savedProduct == null)
-            {
-                throw new KeyNotFoundException();
-            }
-            savedProduct.Name = product.Name;
-            savedProduct.Price = product.Price;
-            savedProduct.Description = product.Description;
-            savedProduct.DeliveryPrice = product.DeliveryPrice;
-            _context.Product.Update(savedProduct);
-            _context.SaveContextChanges();
-
-            return savedProduct;
-        }
-
-        public bool DeleteProduct(Product product)
-        {
-            var savedProduct = _context.Product.FirstOrDefault(p => p.Id == product.Id);
-            if (savedProduct == null)
-            {
-                throw new KeyNotFoundException();
-            }
-            _context.Product.Remove(savedProduct);
-            return _context.SaveContextChanges();
-        }
-
+       
         public IQueryable<Product> SearchByName(string name)
         {
             var items = _context.Product.Where(p => p.Name.Contains(name, StringComparison.InvariantCulture));
@@ -140,29 +77,65 @@ namespace RefactorThis.Core.Infra.Data.Repository
             return _context.SaveContextChanges();
         }
 
-        public void Add(Product obj)
+        public void Add(Product product)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var newProduct = _context.Product.Add(product);
+                if (newProduct == null)
+                {
+                    throw new NullReferenceException("Product shouldn't be null after it is added");
+                }
+                _context.SaveContextChanges();
+            }
+            catch (InvalidOperationException operationException)
+            {
+                _logger.LogError(LoggingEvents.AddProduct, operationException, "Possible Primary Key Violation {id}", product.Id);
+                throw;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(LoggingEvents.AddProduct, exception, "AddProduct Exception {id}", product.Id);
+                throw;
+            }
         }
 
         public Product GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var product = _context.Product.Include(p => p.ProductOptions).FirstOrDefault(p => p.Id == id);
+            return product;
         }
 
         public IQueryable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            var products = _context.Product;
+            return products;
         }
 
-        public void Update(Product obj)
+        public void Update(Product product)
         {
-            throw new NotImplementedException();
+            var savedProduct = _context.Product.FirstOrDefault(p => p.Id == product.Id);
+            if (savedProduct == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            savedProduct.Name = product.Name;
+            savedProduct.Price = product.Price;
+            savedProduct.Description = product.Description;
+            savedProduct.DeliveryPrice = product.DeliveryPrice;
+            _context.Product.Update(savedProduct);
+            _context.SaveContextChanges();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            var savedProduct = _context.Product.FirstOrDefault(p => p.Id == id);
+            if (savedProduct == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            _context.Product.Remove(savedProduct);
+            _context.SaveContextChanges();
         }
 
         public int SaveChanges()
@@ -170,11 +143,7 @@ namespace RefactorThis.Core.Infra.Data.Repository
             throw new NotImplementedException();
         }
 
-        public void qDispose()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public void Dispose()
         {
             _context.Dispose();

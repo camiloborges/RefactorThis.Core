@@ -52,15 +52,15 @@ namespace RefactorThis.Core.Application.Services
         {
             return _mapper.Map<ProductOptionViewModel>(_productRepository.GetProductOption(productId,productOptionId));
         }
-        public void Create(ProductViewModel customerViewModel)
+        public void Create(ProductViewModel productViewModel)
         {
-            var registerCommand = _mapper.Map<CreateProductCommand>(customerViewModel);
-            Bus.SendCommand(registerCommand);
+            var command = _mapper.Map<CreateProductCommand>(productViewModel);
+            Bus.SendCommand(command);
         }
 
-        public void Update(ProductViewModel customerViewModel)
+        public void Update(ProductViewModel productViewModel)
         {
-            var updateCommand = _mapper.Map<UpdateProductCommand>(customerViewModel);
+            var updateCommand = _mapper.Map<UpdateProductCommand>(productViewModel);
             Bus.SendCommand(updateCommand);
         }
 
@@ -69,12 +69,6 @@ namespace RefactorThis.Core.Application.Services
             var removeCommand = new RemoveProductCommand(id);
             Bus.SendCommand(removeCommand);
         }
-/*
-        public IList<ProductOptionsViewModel> GetAllHistory(Guid id)
-        {
-            return CustomerHistory.ToJavaScriptCustomerHistory(_eventStoreRepository.All(id));
-        }
-*/
         public void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -82,17 +76,20 @@ namespace RefactorThis.Core.Application.Services
 
         public void CreateProductOption(ProductOptionViewModel productOptionViewModel)
         {
-            throw new NotImplementedException();
+            var command = _mapper.Map<CreateProductOptionCommand>(productOptionViewModel);
+            Bus.SendCommand(command);
         }
 
-        public void UpdateProductOption(ProductOptionViewModel productViewModel)
+        public void UpdateProductOption(ProductOptionViewModel productOptionViewModel)
         {
-            throw new NotImplementedException();
+            var command = _mapper.Map<UpdateProductOptionCommand>(productOptionViewModel);
+            Bus.SendCommand(command);
         }
 
         public void RemoveProductOption(Guid id, Guid productOptionId)
         {
-            throw new NotImplementedException();
+            var command = new RemoveProductOptionCommand(id, productOptionId);
+            Bus.SendCommand(command);
         }
     }
 }

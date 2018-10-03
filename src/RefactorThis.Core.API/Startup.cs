@@ -37,7 +37,6 @@ namespace RefactorThis.Core
                 options.UseCentralRoutePrefix(new RouteAttribute("api/v{version}"));
             });*/
 
-
             services.AddAutoMapperSetup();
             //  services.AddScoped<ILogger, Logger>();
             services.AddSwaggerGen(c =>
