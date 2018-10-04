@@ -13,7 +13,7 @@ using RefactorThis.Core.Domain.EventHandlers;
 using RefactorThis.Core.Domain.Events;
 using RefactorThis.Core.Domain.Interfaces;
 using RefactorThis.Core.Infra.CrossCutting.Bus;
-using RefactorThis.Core.Infra.CrossCutting.Identity.Authorization;
+//using RefactorThis.Core.Infra.CrossCutting.Identity.Authorization;
 using RefactorThis.Core.Infra.CrossCutting.Identity.Models;
 using RefactorThis.Core.Infra.Data;
 using RefactorThis.Core.Infra.Data.Context;
@@ -26,7 +26,7 @@ using RefactorThis.Core.Models;
 
 namespace RefactorThis.Core.Infra.CrossCutting.IoC
 {
-    public class NativeInjectorBootStrapper
+    public static class NativeInjectorBootStrapper
     {
         public static void RegisterServices(IServiceCollection services)
         {
@@ -37,7 +37,7 @@ namespace RefactorThis.Core.Infra.CrossCutting.IoC
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
             // ASP.NET Authorization Polices
-            services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
+    //        services.AddSingleton<IAuthorizationHandler, ClaimsRequirementHandler>();
 
             // Application
             services.AddScoped<IProductAppService, ProductAppService>();

@@ -11,14 +11,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Authorization\ClaimRequirement.cs" />
+    <Compile Remove="Authorization\ClaimsRequirementHandler.cs" />
     <Compile Remove="Extensions\EmailSenderExtensions.cs" />
+    <Compile Remove="Models\AccountViewModels\ExternalLoginViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\LoginViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\LoginWith2faViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\RegisterViewModel.cs" />
+    <Compile Remove="Models\AccountViewModels\ResetPasswordViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\ChangePasswordViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\EnableAuthenticatorViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\ExternalLoginsViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\IndexViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\RemoveLoginViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\SetPasswordViewModel.cs" />
+    <Compile Remove="Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs" />
     <Compile Remove="Services\IEmailSender.cs" />
     <Compile Remove="Services\ISmsSender.cs" />
     <Compile Remove="Services\MessageServices.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Authorization\ClaimRequirement.cs" />
+    <Content Include="Authorization\ClaimsRequirementHandler.cs" />
     <Content Include="Extensions\EmailSenderExtensions.cs" />
+    <Content Include="Models\AccountViewModels\ExternalLoginViewModel.cs" />
+    <Content Include="Models\AccountViewModels\ForgotPasswordViewModel.cs" />
+    <Content Include="Models\AccountViewModels\LoginViewModel.cs" />
+    <Content Include="Models\AccountViewModels\LoginWith2faViewModel.cs" />
+    <Content Include="Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs" />
+    <Content Include="Models\AccountViewModels\RegisterViewModel.cs" />
+    <Content Include="Models\AccountViewModels\ResetPasswordViewModel.cs" />
+    <Content Include="Models\ManageViewModels\ChangePasswordViewModel.cs" />
+    <Content Include="Models\ManageViewModels\EnableAuthenticatorViewModel.cs" />
+    <Content Include="Models\ManageViewModels\ExternalLoginsViewModel.cs" />
+    <Content Include="Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs" />
+    <Content Include="Models\ManageViewModels\IndexViewModel.cs" />
+    <Content Include="Models\ManageViewModels\RemoveLoginViewModel.cs" />
+    <Content Include="Models\ManageViewModels\SetPasswordViewModel.cs" />
+    <Content Include="Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs" />
     <Content Include="Services\IEmailSender.cs" />
     <Content Include="Services\ISmsSender.cs" />
     <Content Include="Services\MessageServices.cs" />

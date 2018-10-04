@@ -5,10 +5,12 @@ namespace RefactorThis.Core.Domain.Commands
 {
     public class UpdateProductOptionCommand : ProductOptionCommand
     {
-        public UpdateProductOptionCommand(Guid productId, Guid id)
+        public UpdateProductOptionCommand(Guid productId, Guid id, string name, string description)
         {
             ProductId = productId;
             Id = id;
+            Name = name;
+            Description = description;
         }
 
         public override bool IsValid()

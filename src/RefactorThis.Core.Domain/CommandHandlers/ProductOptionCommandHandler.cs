@@ -8,6 +8,7 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace RefactorThis.Core.Domain.CommandHandlers
 {
@@ -41,9 +42,9 @@ namespace RefactorThis.Core.Domain.CommandHandlers
 
             var existingProduct = _repository.GetById(message.ProductId);
 
-            if (existingProduct != null)
+            if (existingProduct == null)
             {
-                var busMessage = String.Format(CultureInfo.InvariantCulture, "This product id ({0}) is already taken.", message.Id);
+                var busMessage = String.Format(CultureInfo.InvariantCulture, "Product id ({0}) not found .", message.Id);
                 Bus.RaiseMediatorEvent(new DomainNotification(message.MessageType, busMessage));
                 return Unit.Task;
             }
@@ -52,7 +53,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseMediatorEvent(new ProductOptionRemovedEvent(productOption.Id, productOption.ProductId));
+                Bus.RaiseMediatorEvent(new ProductOptionCreatedEvent(productOption.Id, productOption.ProductId, productOption.Name,productOption.Description));
             }
 
             return Unit.Task;
@@ -98,7 +99,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseMediatorEvent(new ProductRemovedEvent(message.Id));
+                Bus.RaiseMediatorEvent(new ProductOptionRemovedEvent(message.ProductId,message.Id));
             }
 
             return Unit.Task;
