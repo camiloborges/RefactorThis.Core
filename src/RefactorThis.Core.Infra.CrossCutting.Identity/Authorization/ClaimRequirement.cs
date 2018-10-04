@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace RefactorThis.Core.Infra.CrossCutting.Identity.Authorization
+﻿namespace RefactorThis.Core.Infra.CrossCutting.Identity.Authorization
 {
     public class ClaimRequirement : IAuthorizationRequirement
     {

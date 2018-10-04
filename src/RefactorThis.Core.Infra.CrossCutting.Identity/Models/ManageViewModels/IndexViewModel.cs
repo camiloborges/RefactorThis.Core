@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace RefactorThis.Core.Infra.CrossCutting.Identity.Models.ManageViewModels
+﻿namespace RefactorThis.Core.Infra.CrossCutting.Identity.Models.ManageViewModels
 {
     public class IndexViewModel
     {

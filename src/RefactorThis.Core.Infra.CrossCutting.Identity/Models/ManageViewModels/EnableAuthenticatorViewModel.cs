@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 
 namespace RefactorThis.Core.Infra.CrossCutting.Identity.Models.ManageViewModels
 {

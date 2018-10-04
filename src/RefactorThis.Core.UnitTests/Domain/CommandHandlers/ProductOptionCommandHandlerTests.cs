@@ -5,7 +5,6 @@ using RefactorThis.Core.Domain.Commands;
 using RefactorThis.Core.Domain.Core.Bus;
 using RefactorThis.Core.Domain.Core.Notifications;
 using RefactorThis.Core.Domain.Events;
-using RefactorThis.Core.Domain.Extensions;
 using RefactorThis.Core.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace RefactorThis.Core.UnitTests.Domain.CommandHandlers
             uow.Setup(u => u.Commit()).Returns(true);
             var createProductcommand = new CreateProductOptionCommand(mock.ProductId, mock.Name, mock.Description);
             handler.Handle(createProductcommand, CancellationToken.None);
-            repo.Verify(r=> r.Update(It.IsAny<Product>()),Times.Once);
+            repo.Verify(r => r.Update(It.IsAny<Product>()), Times.Once);
             bus.Verify(b => b.RaiseMediatorEvent<ProductOptionCreatedEvent>(It.IsAny<ProductOptionCreatedEvent>()), Times.Once);
         }
 
@@ -52,7 +51,7 @@ namespace RefactorThis.Core.UnitTests.Domain.CommandHandlers
             bus.Setup(b => b.RaiseMediatorEvent(It.IsAny<DomainNotification>())).Verifiable();
             repo.Setup(r => r.GetById(mockProduct.Id)).Returns(mockProduct);
 
-            repo.Setup(r => r.GetProductOption(mock.ProductId,mock.Id)).Returns(mock);
+            repo.Setup(r => r.GetProductOption(mock.ProductId, mock.Id)).Returns(mock);
             //adding an 'exception' should code attempt to add product
             repo.Setup(r => r.AddProductOption(It.IsAny<ProductOption>())).Throws<Exception>();
 
@@ -113,7 +112,7 @@ namespace RefactorThis.Core.UnitTests.Domain.CommandHandlers
             var mock = Mocks.ProductMocks.NewProductiPhoneXS.ProductOptions.First();
 
             bus.Setup(b => b.RaiseMediatorEvent(It.IsAny<DomainNotification>())).Verifiable();
-            repo.Setup(r => r.GetProductOption(mock.ProductId,mock.Id)).Returns(mock);
+            repo.Setup(r => r.GetProductOption(mock.ProductId, mock.Id)).Returns(mock);
 
             var handler = new ProductOptionCommandHandler(repo.Object, uow.Object, bus.Object, notifications.Object);
             var productcommand = new UpdateProductOptionCommand(mock.ProductId, mock.Id, mock.Name, mock.Description);

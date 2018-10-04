@@ -6,12 +6,7 @@ namespace RefactorThis.Core.Domain.Interfaces
     public interface IProductsRepository : IRepository<Product>
     {
         IQueryable<Product> Items { get; }
-
-        //  IQueryable<Product> GetAllProducts();
-        // Product GetProduct(Guid productId);
-        //  Product AddProduct(Product product);
-        //Product UpdateProduct(Product product);
-        //bool DeleteProduct(Product product);
+       
         ProductOption GetProductOption(Guid productId, Guid optionId);
 
         IQueryable<ProductOption> GetProductOptions(Guid productId);

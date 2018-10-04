@@ -8,7 +8,6 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace RefactorThis.Core.Domain.CommandHandlers
 {
@@ -53,7 +52,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseMediatorEvent(new ProductOptionCreatedEvent(productOption.Id, productOption.ProductId, productOption.Name,productOption.Description));
+                Bus.RaiseMediatorEvent(new ProductOptionCreatedEvent(productOption.Id, productOption.ProductId, productOption.Name, productOption.Description));
             }
 
             return Unit.Task;
@@ -99,7 +98,7 @@ namespace RefactorThis.Core.Domain.CommandHandlers
 
             if (Commit())
             {
-                Bus.RaiseMediatorEvent(new ProductOptionRemovedEvent(message.ProductId,message.Id));
+                Bus.RaiseMediatorEvent(new ProductOptionRemovedEvent(message.ProductId, message.Id));
             }
 
             return Unit.Task;

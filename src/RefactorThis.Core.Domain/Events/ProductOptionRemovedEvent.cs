@@ -5,7 +5,7 @@ namespace RefactorThis.Core.Domain.Events
 {
     public class ProductOptionRemovedEvent : DomainEvent
     {
-        public ProductOptionRemovedEvent(Guid productId, Guid id )
+        public ProductOptionRemovedEvent(Guid productId, Guid id)
         {
             Id = id;
             ProductId = productId;
